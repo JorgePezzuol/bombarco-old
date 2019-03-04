@@ -1,0 +1,250 @@
+
+<!--Start header-->
+<header class="header">
+
+        <?php if(Yii::app()->user->isAdmin()): ?>
+
+        <?php
+            // vai guardar o link que leva o usuario a dar update em sua empresa (caso exista)
+            $link_update_empresa;
+            // checar se tem empresa
+            if(Usuarios::getEmpresa() != null) {
+                $link_update_empresa = '/empresas/update/'.Usuarios::getEmpresa()->id;
+            }
+            else {
+                $link_update_empresa = '#';
+            }
+
+        ?>
+
+        <div id="mainMbMenu">
+            <?php $this->widget('application.extensions.mbmenu.MbMenu',array(
+                'items'=>array(
+
+                    array('label'=>'Embarcações', 'url'=>'#',
+                      'items'=>array(
+                       // array('label'=>'Meus Anúncios', 'url'=>array('/embarcacoes/admin'), 'visible'=>(Yii::app()->user->getState('admin_id') != Yii::app()->user->id)),
+                        array('label'=>'Anúncios Para Validar', 'url'=>array('/embarcacoes/adminAnunciosParaValidar'), 'visible'=>Yii::app()->user->isAdmin()),
+                        array('label'=>'Todos os Anúncios', 'url'=>array('/embarcacoes/adminGeral'), 'visible'=>Yii::app()->user->isAdmin()),
+                        //array('label'=>'Cadastrar Embarcação', 'url'=>array('/embarcacoes/create'), 'visible'=>Yii::app()->user->isAdmin() ),
+                       // array('label'=>'Continuar Anunciando - Plano', 'url'=>array('/anuncios/anunciarEmbarcacao?tipo_anuncio=plano'), 'visible'=>Usuarios::hasPlanoAnuncio()),
+                        array('label'=>'Cadastrar embarcação de estaleiro', 'url'=>array('/anuncios/anunciarEmbarcacao?tipo_anuncio=estaleiro'), 'visible'=>Yii::app()->user->isShipyard()),
+                        array('label'=>'Fabricantes', 'url'=>array('/embarcacaoFabricantes/admin'), 'visible'=>Yii::app()->user->isAdmin() ),
+                        array('label'=>'Modelos', 'url'=>array('/embarcacaoModelos/admin'), 'visible'=>Yii::app()->user->isAdmin() ),
+                        array('label'=>'Tipos de Embarcações', 'url'=>array('/embarcacaoTipos/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                        array('label'=>'Tabela Bombarco', 'url'=>array('/tabelaEmbarcacoes/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                      ),
+                    ),
+
+                    array('label'=>'Empresas', 'url'=>'#',
+                      'items'=>array(
+                        array('label'=>'Todos os Anúncios', 'url'=>array('/empresas/admin')),
+                        array('label'=>'Anúncios Pagos', 'url'=>array('/empresas/adminAnunciosPagos')),
+                        array('label'=>'Categorias', 'url'=>array('/empresaCategorias/admin')),
+                      ),
+                      'visible'=>Yii::app()->user->isAdmin()
+                    ),
+
+
+                    array('label'=>'Estaleiros', 'url'=>'#',
+                      'items'=>array(
+                        array('label'=>'Gerenciar Estaleiros', 'url'=>array('/empresas/adminEstaleiros')),
+                        array('label'=>'Cadastrar Estaleiro', 'url'=>array('/estaleiros/cadastrar-estaleiro')),
+                        array('label'=>'Embarcações', 'url'=>array('/embarcacoes/adminEstaleiros'), 'visible'=>Yii::app()->user->isAdmin()),
+                      ),
+                      'visible'=>Yii::app()->user->isAdmin()
+                    ),
+
+                   // array('label'=>'Gerenciar Pagamentos', 'url'=>array('/anuncios/anuncioPagamento'), 'visible'=>(Usuarios::getOrdens() != null)),
+
+                    array('label'=>'Comunidade', 'url'=>'#',
+                      'items'=>array(
+                        array('label'=>'Gerenciar', 'url'=>array('/conteudos/admin')),
+                        array('label'=>'Categorias', 'url'=>array('/conteudoCategorias/admin')),
+                        array('label'=>'Adicionar Conteúdo', 'url'=>array('/conteudos/create')),
+                        array('label'=>'Agendas', 'url'=>array('/agendas/admin'))
+                      ),
+                      'visible'=>Yii::app()->user->isAdmin()
+                    ),
+
+                    array('label'=>'Motores', 'url'=>'#', 'items'=>array(
+                            //array('label'=>'Gerenciar Motores', 'url'=>array('/motores/admin')),
+                            array('label'=>'Modelos', 'url'=>array('/motorModelos/admin')),
+                            array('label'=>'Fabricantes', 'url'=>array('/motorFabricantes/admin')),
+                            array('label'=>'Tipos', 'url'=>array('/motorTipos/admin'))
+                            ),
+                            'visible'=>Yii::app()->user->isAdmin()
+                        ),
+
+
+
+                          array('label'=>'Maillings', 'url'=>array('/maillings/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+
+                        array('label'=>'Acessórios', 'url'=>'#', 'items'=>array(
+                                array('label'=>'Tipos de Acessórios', 'url'=>array('/acessorioTipos/admin')),
+                            ),
+                            'visible'=>Yii::app()->user->isAdmin()
+                        ),
+
+                   /* array('label'=>'SEO', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(),
+                        'items'=>array(
+                            array('label'=>'Redirects', 'url'=>array('/redirects/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                            array('label'=>'Meta Tags', 'url'=>array('/seo/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                        ),
+                    ), */
+
+                    array('label'=>'Usuários', 'url'=>array('/usuarios/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+
+                    //array('label'=>'Anúncios', 'url'=>array('/anuncios/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+
+                    array('label'=>'Banners', 'url'=>array('/banners/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+
+                    array('label'=>'Mensagens', 'url'=>array('/contatos/mensagens'), 'visible'=>!Yii::app()->user->isGuest),
+
+                    /*array('label'=>'Minha conta', 'url'=>'#', 'visible'=>!Yii::app()->user->isGuest,
+                        'items'=>array(
+                            array('label'=>'Alterar Dados', 'url'=>array('/usuarios/update/'.Yii::app()->user->Id)),
+                            array('label'=>'Alterar Senha', 'url'=>array('/usuarios/alterarSenha/'.Yii::app()->user->Id)),
+                        ),
+                    ),*/
+
+                   /*array('label'=>'Minha Empresa', 'url'=>'#', 'visible'=>(Yii::app()->user->isBusiness() || Yii::app()->user->isShipyard()),
+                        'items'=>array(
+                            array('label'=>'Gerenciar Página', 'url'=>array($link_update_empresa)),
+                            array('label'=>'Minhas Embarcações', 'url'=>array('/embarcacoes/adminMinhasEmbarcsEstaleiro'), 'visible'=>Yii::app()->user->isShipyard() || Yii::app()->user->isAdmin()),
+                        ),
+                    ),*/
+                    array('label'=>'Comparações', 'url'=>array('/comparador/comparar'),
+                                'visible'=>Comparador::model()->exists('sessaotoken=:token and usuarios_id=:user and status = 1',
+                    array(':token'=>Yii::app()->session->sessionID, 'user'=>Yii::app()->user->id))),
+
+                    array('label'=>'Favoritos', 'url'=>array('/embarcacoes/favoritos'), 'visible'=>!Yii::app()->user->isGuest),
+
+                    //array('label'=>'Minha Empresa', 'url'=>array($link_update_empresa), 'visible'=>(Yii::app()->user->isBusiness() || Yii::app()->user->isShipyard())),
+
+                    array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+
+                    array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+
+                    array('label'=>'Voltar Admin', 'url'=>array('/usuarios/backadmin'), 'visible'=>(Yii::app()->user->isAdmin() && Yii::app()->user->getState('admin_id') != Yii::app()->user->id)),
+                ),
+        )); ?>
+        </div><!-- mainmenu -->
+    <?php endif ?>
+
+    <!--Start AD-->
+
+
+        <?php
+            $macro = null;
+
+            // Fazendo verificação da Macro
+            // a partir da URL
+            $url = Yii::app()->request->url;
+            if (strpos($url, "lancha") !== FALSE) {// Se tiver "lancha" na URL
+                $macro = EmbarcacaoMacros::$macro_by_slug['lancha'];
+            } else if (strpos($url, "veleiro") !== FALSE) {// Se tiver "veleiro" na URL
+                $macro = EmbarcacaoMacros::$macro_by_slug['veleiro'];
+            } else if (strpos($url, "jet-ski") !== FALSE) {// Se tiver "jet-ski" na URL
+                $macro = EmbarcacaoMacros::$macro_by_slug['jetski'];
+            } else if (strpos($url, "barcos-pesca") !== FALSE) {// Se tiver "jet-ski" na URL
+                $macro = EmbarcacaoMacros::$macro_by_slug['barcos-pesca'];
+            }
+
+            $banner = Banners::loadBanner(Banners::TOPO, $macro, array('width'=>1024, 'height'=>70), true);
+        ?>
+
+        <?php if (!empty($banner)): ?>
+            <section class="advertise-head" style="position:relative;">
+                <div class="container">
+                    <?php echo $banner; ?>
+                </div>
+            </section>
+        <?php endif ?>
+
+
+    <!--End AD-->
+
+    <nav class="menu-head">
+        <div class="container">
+
+            <!--Start Logo-->
+            <div class="bombarco">
+                <a href="<?php echo Yii::app()->homeUrl; ?>" alt="BomBarco" title="Bombarco" rel="home">
+                    <img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/bombarco.png" height="37px" width="231px" alt="Bombarco">
+                </a>
+            </div>
+            <!--End Logo-->
+
+
+            <!--Start do Menu-->
+            <ul class="head-links">
+                <li class="li-dropdown">
+                    <h3><a class="icon-after two-lines" style="line-height:16px">Classificados</a></h3>
+                    <ul class="head-links_sub" >
+                        <li><h3><a href="<?php echo Yii::app()->createUrl('embarcacoes/lanchas-a-venda');?>">Lanchas</a></h3></li>
+                        <li><h3><a href="<?php echo Yii::app()->createUrl('embarcacoes/veleiros-a-venda');?>">Veleiros</a></h3></li>
+                        <li><h3><a href="<?php echo Yii::app()->createUrl('embarcacoes/jet-skis-a-venda');?>">Jet SKis</a></h3></li>
+                        <li><h3><a href="<?php echo Yii::app()->createUrl('embarcacoes/barcos-pesca-a-venda');?>">Barcos de Pesca</a></h3></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3><a href="<?php echo Yii::app()->createUrl('estaleiros');?>" style="display: inline; padding: 12px;">Estaleiros</a></h3>
+                </li>
+                <li>
+                    <h3><a href="<?php echo Yii::app()->createUrl('guia-de-empresas'); ?>" style="display: inline; padding: 12px;">Guia de Empresas</a></h3>
+                </li>
+                <li class="li-dropdown" style="margin-top:-4px">
+                    <h4><a class="icon-after community">Comunidade</a></h4>
+                    <ul class="head-links_sub" >
+                        <li><h4><a href="<?php echo Yii::app()->createUrl('comunidade/raio-x'); ?>">Raio X</a></h4></li>
+
+                        <li><a href="<?php echo Yii::app()->createUrl('comunidade/tabela-bombarco'); ?>">Tabela Bombarco</a></li>
+
+                        <li><h4><a href="<?php echo Yii::app()->createUrl('comunidade/noticias'); ?>">Notícias</a></h4></li>
+                        <li><h4><a href="<?php echo Yii::app()->createUrl('comunidade/primeiro-barco'); ?>">Primeiro Barco</a></h4></li>
+                        <li><h4><a href="<?php echo Yii::app()->createUrl('comunidade/blog'); ?>">Blog</a></h4></li>
+                        <?php /* ?><li><h4><a href="<?php echo Yii::app()->createUrl('comunidade/agenda'); ?>">Agenda</a></h4></li><?php */ ?>
+                    </ul>
+                </li>
+                <li class="li-dropdown">
+                    <h3><a class="icon-after one-line about" >Sobre</a><h3>
+                    <ul class="head-links_sub last-drop">
+                        <li><h3><a class="btn-li-inst" data-ancora="institucional-btn" href="<?php echo Yii::app()->createUrl('institucional#institucional-bb'); ?>">Institucional</a></h3></li>
+                        <li><h3><a class="btn-li-inst" data-ancora="pq-anunciar-btn" href="<?php echo Yii::app()->createUrl('por-que-anunciar#pq-anunciar-bb'); ?>">Porque Anunciar</a></h3></li>
+                        <li><h3><a class="btn-li-inst" data-ancora="como-anunciar-btn" href="<?php echo Yii::app()->createUrl('como-anunciar#como-anunciar-bb'); ?>">Como Anunciar</a></h3></li>
+                        <li><h3><a class="btn-li-inst" data-ancora="planos-btn" href="<?php echo Yii::app()->createUrl('planos#planos-bb'); ?>">Planos</a></h3></li>
+                        <li><h3><a class="btn-li-inst" data-ancora="bom-marinheiro-btn" href="<?php echo Yii::app()->createUrl('bom-marinheiro#bom-marinheiro-bb'); ?>">Bom Marinheiro</a></h3></li>
+                        <li><h3><a class="btn-li-inst" data-ancora="contato-btn" href="<?php echo Yii::app()->createUrl('contato#contato-bb'); ?>">Contato</a></h3></li>
+                    </ul>
+                </li>
+                <li class="account">
+
+                    <?php if(!Yii::app()->user->isGuest): ?>
+                    <i class="icon"></i>
+                    <ul class="sub-account">
+                        <li class="li-minha-conta"><a data-link="perfil" title="Minha Conta" href="<?php echo Yii::app()->createUrl('usuarios/update/'.Yii::app()->user->Id.'?active=perfil'); ?>">Minha Conta</a></li>
+                        <li class="li-minha-conta"><a title="Minha Conta" href="<?php echo Yii::app()->createUrl('site/logout'); ?>">Log out</a></li>
+                    </ul>
+                    <?php else:?>
+                        <!-- <a title="Minha Conta" href="<?php echo Yii::app()->createUrl('login'); ?>"><i class="icon"></i></a> -->
+                        <i class="icon"></i>
+                        <ul class="sub-account">
+                            <li class="li-minha-conta"><a title="Minha Conta" href="<?php echo Yii::app()->createUrl('login'); ?>">Login / Cadastro</a></li>
+                            <!-- <li class="li-minha-conta"><a title="Minha Conta" href="<?php echo Yii::app()->createUrl('site/logout'); ?>">Log out</a></li> -->
+                        </ul>
+                    <?php endif;?>
+                </li>
+                <li class="advise">
+
+                    <a href="<?php echo Yii::app()->createUrl('anuncios/index'); ?>" onclick="_gaq.push(['_trackEvent', 'Home', 'click', 'Anunciar-topo']);adwords_conversor('ISlSCJb7iVkQkLPC4wM');">
+                        Anunciar
+                    </a>
+                </li>
+            </ul>
+            <!--End Menu-->
+
+        </div>
+    </nav>
+
+</header>

@@ -1,0 +1,180 @@
+.header {
+	background:@white;
+	padding:15px 0px;
+	position:fixed;
+	top:0px;
+	z-index:8889;
+	border-bottom:solid 1px #ccc;
+	.btn-menu {
+		width:34px;
+		height:32px;
+		background-position:-26px -88px;
+		margin-right:25px;
+	}
+	.logo-header {
+		width:216px;
+		height:34px;
+		background-position:-550px -21px;
+	}
+}
+.main-menu {
+	width:100%;
+	height:100%;
+	background:@white;
+	position:fixed;
+	top:0;
+	z-index:99999999;
+	padding:5px 0px;
+	display:none;
+	overflow:scroll;
+	.btn-close-menu {
+		background-position: -148px -90px;
+		width: 26px;
+		height: 26px;
+		margin-right:5px;
+	}
+	.menu {
+		padding-bottom:13px;
+		margin-top:30px;
+		.even {
+			background:@white;
+			border-bottom:solid 1px #ccc;
+		}
+		.odd {
+			background:@lightgrey;
+		}
+		.item-menu {
+			.link-menu {
+				font:15px @font-serif-bold;
+				color:@darkblue;
+				text-transform:uppercase;
+				text-decoration:none;
+				padding:13px 0px 13px 25px;
+				display:block;
+				&:active {
+					background:@darkblue;
+					color:@green;
+				}
+				.ico-menu {
+					margin-right:22px;
+				}
+				.ico-home {
+					background-position: -27px -233px;
+					width: 18px;
+					height: 16px;
+				}
+				.ico-embarcacoes {
+					background-position: -63px -234px;
+					width: 19px;
+					height: 14px;
+					margin-right:20px;
+					margin-top:2px;
+				}
+				.ico-estaleiros {
+					background-position: -100px -230px;
+					width: 22px;
+					height: 22px;
+					margin-right:17px;
+					margin-top:-4px;				}
+				.ico-empresas {
+					background-position: -139px -234px;
+					width: 16px;
+					height: 14px;
+					margin-left:3px;
+					margin-right:21px;
+					margin-top:1px;
+				}
+				.ico-institucional {
+					background-position: -165px -236px;
+					width: 29px;
+					height: 10px;
+					margin-left:-6px;
+					margin-right:17px;
+					margin-top:5px;
+				}
+				.ico-anunciar {
+					background-position: -208px -232px;
+					width: 17px;
+					height: 18px;
+					margin-left:2px;
+					margin-right:20px;
+				}
+				.ico-contato {
+					background-position: -238px -233px;
+					width: 16px;
+					height: 16px;
+					margin-left:2px;
+					margin-right:20px;
+				}
+				.ico-favoritos {
+					background-position: -268px -233px;
+					width: 16px;
+					height: 16px;
+					margin-left:3px;
+					margin-right:19px;
+				}
+				.ico-logout {
+					background-position: -299px -233px;
+					width: 17px;
+					height: 16px;
+					margin-left:5px;
+					margin-right:17px;
+				}
+				.ico-arrow {
+					background-position: -546px -128px;
+					width: 12px;
+					height: 8px;
+					margin-top:5px;
+					margin-left:12px;
+				}
+			}
+			.active {
+				background:@darkblue;
+				color:@green;
+			}
+		}
+	}
+	.sub-item {
+		display:none;
+		.menu-sub {
+			background:@darkblue;
+			list-style:none;
+			border-top:solid 1px @green;
+			.item-menu {
+				background:transparent;
+				.link-menu {
+					font:15px @font-serif-bold;
+					color:@white;
+					text-transform:uppercase;
+					text-decoration:none;
+					padding:13px 0px 13px 25px;
+					display:block;
+					&:active {
+						background:@green;
+					}
+					.ico-menu {
+						margin-right:22px;
+					}
+					.ico-lanchas {
+						background-position: -260px -349px;
+						width: 28px;
+						height: 8px;
+						margin-right: 16px;
+						margin-top: 6px;
+					}
+					.ico-veleiros {
+						background-position: -298px -344px;
+						width: 25px;
+						height: 17px;
+						margin-right:20px;
+					}
+					.ico-jetskis {
+						background-position: -334px -344px;
+						width: 23px;
+						height: 15px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,382 @@
+/*=============================
+=            Busca            =
+=============================*/
+
+$(document).ready(function() {
+
+    /*Plugin Mais Filtros - Busca*/
+    $(".botao-mais-filtros").on("click", function(e) {
+      if($(window).width() < 789){
+        $(".linha-mais-opcoes").css({"marginTop":-130})
+        $(".div-btn-mais-filtros-list").css({"top": "663px", "position": "relative", "zIndex": "100", "background": "#fff", "padding": "20px 0"});
+        $('.linha-mais-opcoes').show();
+      }else{
+        $('.linha-mais-opcoes').slideDown();
+      }
+      $('.botao-mais-filtros').hide();
+      $('.botao-mais-filtros2').css("display","inline-block");
+      $('.line-white-2-listagem').css('border-bottom-color','#ffffff');
+    });
+    $(".botao-mais-filtros2").on("click", function(e) {
+      $('.botao-mais-filtros').show();
+      $('.botao-mais-filtros2').hide();
+      if($(window).width() < 789){
+        $('.linha-mais-opcoes').hide();
+        $(".div-btn-mais-filtros-list").css({"position": "static", "padding": "0"});
+        $(".linha-mais-opcoes").css({"marginTop":0})
+      }else{
+        $('.linha-mais-opcoes').slideUp();
+      }
+      $('.line-white-2-listagem').css('border-bottom-color','#cbcbcb');
+    });
+
+
+    /*Fim*/
+
+    var $form = $('#form-search');
+
+    //$('#brand').dropdown({gutter : 5});
+    //$('#model').dropdown({gutter : 5});
+    //$('#condition').dropdown({gutter : 5});
+    //$('#select-listagem5').dropdown({gutter : 5});
+
+    $("#price").ionRangeSlider({
+
+        min: 0,
+        max: 2000000,
+        from: $(this).data('min'),
+        to: $(this).data('max'),
+        type: 'double',
+        step: 5000,
+        hideMinMax: true,
+        hideFromTo:true,
+        prettify: true,
+        hasGrid: false,
+        onChange: function(obj) {
+
+            delete obj.input;
+            delete obj.slider;
+            var minimo = JSON.stringify(obj.fromNumber);
+            var maximo = JSON.stringify(obj.toNumber);
+
+           /* if(minimo == 0) {
+                minimo = 1;
+            }*/
+
+
+            $(".slide-price .under span span, .slide-price .under input").html(minimo).priceFormat({
+                clearPrefix: true,
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+            $(".slide-price .under input").val(minimo).priceFormat({
+                clearPrefix: true,
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+
+            $(".slide-price .above span span, .slide-price .above input").html(maximo).priceFormat({
+                clearPrefix: true,
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+            $(".slide-price .above input").val(maximo).priceFormat({
+                clearPrefix: true,
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+
+            if (maximo >= 2000000) {
+                $(".slide-price .above .prefix").text('+ de');
+            } else {
+                $(".slide-price .above .prefix").text('até');
+            }
+        },
+        onLoad: function(obj) {
+            delete obj.input;
+            delete obj.slider;
+            var minimo = JSON.stringify(obj.fromNumber);
+            var maximo = JSON.stringify(obj.toNumber);
+
+
+            $(".slide-price .under span span, .slide-price .under input").html(minimo).priceFormat({
+                prefix: '',
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+
+            $(".slide-price .under input").val(minimo).priceFormat({
+                prefix: '',
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+
+            $(".slide-price .above span span, .slide-price .above input").html(maximo).priceFormat({
+                prefix: '',
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+            $(".slide-price .above input").val(maximo).priceFormat({
+                prefix: '',
+                thousandsSeparator: '.',
+                centsLimit: 3
+            });
+        }
+    });
+
+
+    $("#feets").ionRangeSlider({
+        min: 0,
+        max: 200,
+        type: 'double',
+        step: 5, 
+        from: 5,
+        to: 80,
+        hideMinMax: true,
+        hideFromTo:true,
+        prettify: true,
+        hasGrid: false,
+        onChange: function(obj) {
+            delete obj.input;
+            delete obj.slider;
+            var minimo = JSON.stringify(obj.fromNumber),
+                maximo = JSON.stringify(obj.toNumber);
+
+           /* if(minimo == 0) {
+                minimo = 1;
+            }*/
+
+            $(".slide-feet .under span span").html(minimo);
+            $(".slide-feet .under input").val(minimo);
+
+            $(".slide-feet .above span span").html(maximo);
+            $(".slide-feet .above input").val(maximo);
+
+            /*if (maximo >= 200) {
+                $(".slide-feet .above .prefix").text('+ de');
+            } else {
+                $(".slide-feet .above .prefix").text('até');
+            }*/
+        },
+        onLoad: function(obj) {
+
+            delete obj.input;
+            delete obj.slider;
+            var minimo = JSON.stringify(obj.fromNumber),
+                maximo = JSON.stringify(obj.toNumber);
+
+            $(".slide-feet .under span span").html(minimo);
+            $(".slide-feet .under input").val(minimo);
+
+            $(".slide-feet .above span span").html(maximo);
+            $(".slide-feet .above input").val(maximo);
+        }
+    });
+
+
+    /*$('.brand .cd-dropdown ul, .model .cd-dropdown ul, .condition .cd-dropdown ul').slimScroll({
+        height: '180px',
+        width: '100%',
+        distance: '10px',
+        railVisible: false,
+        alwaysVisible: true
+    });*/
+
+    // Iniciando modelos travados
+    $form.find('.select-modelos.locked').fadeTo(500, 0.3);
+
+    /**
+     * AJAX que carrega Modelos a partir de Fabricantes
+     * @return {[type]} [description]
+     */
+    $form.on('change', 'select#brand', function() {
+
+        value = $(this).val();
+
+        if (value > 0) {
+
+                            $.ajax({
+                                type: 'POST',
+                                url: Yii.app.createUrl('utils/DropDownModelos'),
+                                data: { id: value, input_name: 'modelo', input_id: 'model', placeholder: 'Modelo', selected: ''},
+                                success: function(data, textStatus, jqXHR) {
+                                    $form.find('#model').html($(data).html());
+                                }
+                            });
+
+
+            //ajaxecute(Yii.app.createUrl('utils/DropDownModelos'), value, "modelo", "model", "#form-search span.select-modelos", "Modelo");
+            //ajaxecuteSizeRange(Yii.app.createUrl('utils/LoadSizeRanges'), "#feets", $macro_active, value);
+
+            // mostrando pés
+            $form.find('.slide-feet').show();
+            $('.categories-listagem-linha-mf').show();
+
+            $("#feets").ionRangeSlider("update", {
+                      min: 0,
+                max: 200,
+                from: 0,
+                to: 200
+                   });
+
+            $form.find('.select-modelos').fadeTo(500, 1);
+
+        } else {
+            $form.find('.select-modelos').fadeTo(500, 0.3);
+            resetForm();
+        }
+
+    });
+
+
+    /**
+     * AJAX que carrega Preco e Pés a partir do Modelo
+     * @return {[type]} [description]
+     */
+    $form.on('change', 'select#model', function() {
+
+        $('.categories-listagem-linha-mf').css('opacity','0.2');
+        $('.validate-opacity-tipo').show();
+
+        // Atualizando Ranges
+        /*$.ajax({
+            type: 'POST',
+            url: Yii.app.createUrl('utils/LoadRanges'),
+            data: { id: $(this).val() },
+            success: function(data, textStatus, jqXHR) {
+
+                // escondendo pés
+                $form.find('.slide-feet').css('opacity','0.2');
+                $('.validate-opacity-range2').show();
+
+                json = jQuery.parseJSON(data);
+
+                // Se existe embarcacao para aquele modelo
+                // os valores MAX e MIN não serão NULL
+                // então recarrega o Range
+                if (json.minprice != null && json.maxprice != null) {
+
+                    max = 2000000;
+                    if (convertInt(json.maxprice) > max)
+                        max = convertInt(json.maxprice);
+
+                    $("#price").ionRangeSlider("update", {
+                        //min: convertInt(json.minprice),
+                        //max: convertInt(json.maxprice),
+                        max: max,
+                        from: convertInt(json.minprice),
+                        to: convertInt(json.maxprice)
+                    });
+                    $(".slide-price .above .prefix").text('até');
+
+                } else {// Se não zera o Range
+
+                    $("#price").ionRangeSlider("update", {
+                        min: 0,
+                        max: 2000000,
+                        from: 0,
+                        to: 2000000
+                    });
+                }
+            }
+        });*/
+
+    });
+
+
+    // offset
+    var page = 1;
+
+    $(".div-btn-carregar-list").on("click", "#carregar-list", function(e) {
+
+            e.preventDefault();
+
+            $limit = $(this).data("limit");
+
+            data = {};
+            data['macro'] = $(this).data("macro");
+            data['condicao'] = $(this).data("condicao");
+            data['fabricante'] = $(this).data("fabricante");
+            data['preco-min'] = $(this).data("preco-min");
+            data['preco-max'] = $(this).data("preco-max");
+            data['pes-min'] = $(this).data("pes-min");
+            data['pes-max'] = $(this).data("pes-max");
+            data['page'] = page;
+            data['local'] = $(this).data("local");
+            data['buscando'] = $(this).data("buscando");
+            data['tipos'] = $(this).data("tipos");
+            data['ordem'] = $(this).data("ordem");
+            data['ajax'] = true;
+
+            $.ajax({
+                url: Yii.app.createUrl('embarcacoes/busca'),
+                data: data,
+                type: 'GET',
+
+                success: function(resp) {
+
+                    json = JSON.parse(resp.trim());
+
+                    if (json.count > 0) {
+
+                        $(".categories-tabela").append(json.html);
+
+                        // incrementar page
+                        page++;
+
+                        // Se o resultado for menor que o limite, então apaga o botão de carregar mais
+                        if (json.count < $limit) {
+                            $(".div-btn-carregar-list").empty();
+                        }
+
+                    } else {
+                        $(".div-btn-carregar-list").empty();
+                    }
+
+                },
+
+                error: function(x, h, err) {
+                    alert('Ocorreu um erro inesperado! Tente novamente');
+                }
+            });
+
+    });
+
+
+    $(".checkbox-lis-emb .checkcad1").on('click', function(){
+        $form.find("input[name='ordem']").val($(this).val());
+        $form.submit();
+    });
+
+});
+
+
+/**
+ * Zera os valores do Form
+ * @return {[type]} [description]
+ */
+function resetForm() {
+
+    $("#price").ionRangeSlider("update", {
+        min: 0,
+        max: 2000000,
+        from: 0,
+        to: 2000000
+    });
+
+    $("#feets").ionRangeSlider("update", {
+        min: 0,
+        max: 200,
+        from: 0,
+        to: 200
+    });
+
+    $('#form-search .slide-feet').fadeTo(500,1);
+    $('#form-search .select-modelos').fadeTo(500, 0.3);
+    $('#form-search #model').html('<option value="-1" selected>Selecione o modelo</option>');
+    //$('#form-search .model input[name="modelo"]').val("-1");
+    //$('#form-search .model .cd-dropdown > span > span').text("Selecione a marca");
+
+}
+
+/*-----  End of Busca  ------*/

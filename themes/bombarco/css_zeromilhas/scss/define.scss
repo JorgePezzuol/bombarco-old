@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'RobotoBold';
+  src: url('../fonts/Roboto-Black.eot');
+  src: url('../fonts/Roboto-Black.woff2') format('woff2'),
+  url('../fonts/Roboto-Black.eot?#iefix') format('embedded-opentype');
+  src: url('../fonts/Roboto-Black.woff') format('woff'),
+  url('../fonts/Roboto-Black.ttf') format('truetype'),
+  url('../fonts/Roboto-Black.svg#RobotoBold') format('svg');
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.eot');
+  src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+  url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype');
+  src: url('../fonts/Roboto-Regular.woff') format('woff'),
+  url('../fonts/Roboto-Regular.ttf') format('truetype'),
+  url('../fonts/Roboto-Regular.svg#Roboto') format('svg');
+}
+@font-face {
+  font-family: 'RobotoSlab';
+  src: url('../fonts/RobotoSlab-Bold.eot');
+  src: url('../fonts/RobotoSlab-Bold.woff2') format('woff2'),
+  url('../fonts/RobotoSlab-Bold.eot?#iefix') format('embedded-opentype');
+  src: url('../fonts/RobotoSlab-Bold.woff') format('woff'),
+  url('../fonts/RobotoSlab-Bold.ttf') format('truetype'),
+  url('../fonts/RobotoSlab-Bold.svg#RobotoSlab') format('svg');
+}
+
+$fonte-padrao : "Roboto", Helvetica, sans-serif;
+$fonte-bold : "RobotoBold", Arial, sans-serif;
+$fonte-serifa: "RobotoSlab", $fonte-padrao;
+$p : 15px;
+$line : 146.67%;
+$espacamento: 99px 0 121px 0;
+$hr: #979797;
+$cinza-bg: #F5F6FB;
+$cinza-depoimento: #EFEFEF;
+$cor-padrao: #1E252A;
+$icone-padrao: #6E777E;
+$destaque: #1F3E4D;
+$borda: 1px solid #979797;
+$petroleo: #294F5F;
+$azul: #113F9B;
+$well: #203E4C;
+$sombra: rgba( $cinza-depoimento, .25);
+$cor-rodape: #F7F7F9;
+
+/* Placeholders */
+%align-in-vertical { display: inline-flex; align-items: center; }
+%align-vertical { display: grid; align-items: center; }
+%btn-padrao-modal { width:100%; background:#ccc; border-radius:0; padding:0.9333rem; text-transform:uppercase; font-size:.8rem; color: #FFF!important; font-weight:500; margin:0 0 15px 0; }

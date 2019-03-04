@@ -1,0 +1,632 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@font-face {
+  font-family: 'humanst521_btroman';
+  src: url('../fonts/humanist_521_bt-webfont.woff2') format('woff2'), url('../fonts/humanist_521_bt-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Montserrat e Oswald*/
+
+/* CSS modal cartão de credito */
+.credit-card-box .panel-title {
+  display: inline;
+  font-weight: bold;
+}
+.credit-card-box .form-control.error {
+  border-color: red;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+}
+.credit-card-box label.error {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box .payment-errors {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box .display-table {
+  display: table;
+}
+.credit-card-box .display-tr {
+  display: table-row;
+}
+.credit-card-box .display-td {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
+.credit-card-box .panel-heading img {
+  min-width: 180px;
+}
+/* CSS modal cartão de credito fim */
+
+/* FOOTER E NEWS */
+section#news {
+  float: left;
+  position: relative;
+  width: 100%;
+  background-color: #0e2d44;
+  padding: 40px 0 60px 0;
+}
+#cadastro {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+#cadastro p {
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  line-height: 35px;
+  background-image: url(../img/icon-news.jpg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 50px;
+  padding-top: 10px;
+}
+.input {
+  float: left;
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background-color: #fff;
+  height: 50px;
+  background-image: url(../img/icon-email.jpg);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px; /* future proofing */
+  -khtml-border-radius: 25px;
+}
+.input input {
+  float: left;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 50px;
+  margin-left: 40px;
+  padding: 0;
+  border: none;
+  color: #aeaeae;
+  font-size: 14px;
+}
+.input button {
+  float: right;
+  position: relative;
+  width: 10px;
+  height: 50px;
+  margin-right: 15px;
+  background-image: url(../img/seta-right.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.redes {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+.redes p {
+  float: right;
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  line-height: 35px;
+  background-image: url(../img/icon-redes.jpg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding: 8px 10px 0 50px;
+  margin-top: 20px;
+}
+.redes ul {
+  float: right;
+  position: relative;
+  margin:0;
+  padding: 0;
+}
+.redes ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 10px 20px 0 20px;
+}
+section#mapa-site {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+ul#col-mapa {
+  float: left;
+  position: relative;
+  width: 25%;
+  border-bottom: 2px solid #00918e;
+  margin: 0;
+  padding: 0;
+  min-height: 400px;
+}
+ul#col-mapa p {
+  color: #2ca4a2;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #00918e;
+  padding: 30px 20px;
+}
+ul#col-mapa li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  display: block;
+}
+ul#col-mapa li a {
+  float: left;
+  position: relative;
+  width: 100%;
+  color: #808080;
+  font-size: 13px;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 30px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+ul#col-mapa li a.bt-anunciar {
+  float: none;
+  border: 2px solid #00918e;
+  color: #001733;
+  height: 50px;
+  padding: 12px 20px 12px 40px;
+  margin-left: 20px;
+  font-weight: bolder;
+  font-size: 15px;
+  background-image: url(../img/icon-anuncie.jpg);
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px; /* future proofing */
+  -khtml-border-radius: 25px;
+}
+ul#col-mapa li.last {
+  padding-top: 100px;
+}
+#assinatura {
+  float: left;
+  position: relative;
+  width: calc(100% - 40px);
+  padding: 0 20px;
+}
+#assinatura p {
+  float: left;
+  position: relative;
+  line-height: 100px;
+  font-size: 13px;
+  color: #0e2d44;
+  text-transform: uppercase;
+}
+.logo-rodape {
+  float: left;
+  position: relative;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+/* FIM FOOTER E NEWS */
+
+#header_site {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+#header_site .container .logo-header {
+  z-index: 10;
+  position: relative;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 450px;
+  margin-top: 0 !important;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.swiper-slide .img-slider {
+  position: absolute;
+  width: 120%;
+  top: -3px;
+
+}
+
+.slider-ebook {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.section-about-the-ebook {
+  padding: 25px;
+  text-align: center;
+  margin-top: 1vw;
+}
+.section-about-the-ebook .container {
+  max-width: 620px;
+}
+.section-about-the-ebook .container .about-ebook-text {
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Montserrat';
+  color: #0b1f36;
+}
+.section-about-the-ebook .container .wrapper-preco-post-about {
+  max-width: 306px;
+  display: block;
+  margin: 0 auto;
+  clear: both;
+  float: none;
+  position: relative;
+  margin: 20px auto;
+}
+.section-about-the-ebook .container .wrapper-preco-post-about .left-side-price {
+  text-align: right;
+  font-family: 'Montserrat';
+  font-size: 2rem;
+  display: block;
+  font-weight: 700;
+  line-height: 20px;
+  color: #016969;
+}
+.section-about-the-ebook .container .wrapper-preco-post-about .right-side-price {
+  font-family: 'Montserrat';
+  font-weight: bolder;
+  font-size: 3.3rem;
+  margin-top: 0px;
+  color: #016969;
+  text-align: left;
+  padding-left: 2px;
+}
+.section-about-the-ebook .container .button-comprar-bombarco {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  float: none;
+  position: relative;
+  text-decoration: none;
+  font-weight: 900;
+  margin-top: 80px;
+  background-color: #016969;
+  padding: 12px 20px;
+  border-radius: 55px;
+  font-size: 1.6rem;
+  width: 165px;
+  color: white;
+  -webkit-transition: 250ms all ease;
+  -moz-transition: 250ms all ease;
+  -ms-transition: 250ms all ease;
+  -o-transition: 250ms all ease;
+}
+.section-about-the-ebook .container .button-comprar-bombarco:before {
+  font-family: FontAwesome;
+  content: "\f13d";
+  display: inline-block;
+  padding-right: 8px;
+  vertical-align: middle;
+  color: #000505;
+  /*-webkit-transition: 500ms all ease;
+  -moz-transition: 500ms all ease;
+  -ms-transition: 500ms all ease;
+  -o-transition: 500ms all ease;*/
+}
+.section-about-the-ebook .container .button-comprar-bombarco:hover {
+  background-color: #47afaf;
+}
+.section-about-the-ebook .container .button-comprar-bombarco:hover:before {
+  /*-webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);*/
+}
+.section-contents-list {
+  padding: 5px;
+  padding-bottom: 35px;
+  background-color: #EEEEEE;
+}
+.section-contents-list .container .title-contents-list {
+  text-transform: uppercase;
+  color: #016969;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  padding-left: 40px;
+}
+.section-contents-list .container .column-contents .contents-list .item-list {
+  font-family: 'Montserrat';
+  font-size: 1.5rem;
+  margin: 5px auto;
+  color: #808080;
+  font-weight: 100;
+  position: relative;
+  list-style: none;
+}
+
+.item-list:before {
+  content: '\f0da';
+  display: block;
+  position: absolute;
+  left: -10px;
+  height: 12px;
+  overflow: hidden;
+  top: 8px;
+  font-size: 1.8rem;
+  font-family: FontAwesome;
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.section-contents-list .container .column-contents .contents-list .item-list small {
+  display: block;
+  margin: 10px auto;
+  font-size: 1.1rem;
+  /*padding-left: 25px;*/
+  /*padding-right: 175px;*/
+}
+.form-cadastro-email {
+  text-align: center;
+}
+.form-cadastro-email .container {
+  max-width: 400px;
+}
+.form-cadastro-email .container .title-form {
+    font-size: 1.4rem;
+    font-family: 'Montserrat';
+    color: #0b1f36;
+    padding: 15px;
+}
+.form-cadastro-email .container .form-cadastro .campo-form {
+  border: 1px solid black;
+  padding: 15px 35px;
+  padding-left: 35px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 5px auto;
+  position: relative;
+}
+.form-cadastro-email .container .form-cadastro .campo-form:before {
+  font-family: FontAwesome;
+  /*content: "\f13d";*/
+  display: inline-block;
+  padding-right: 8px;
+  vertical-align: middle;
+  color: #000505;
+  -webkit-transition: 500ms all ease;
+  -moz-transition: 500ms all ease;
+  -ms-transition: 500ms all ease;
+  -o-transition: 500ms all ease;
+  position: absolute;
+  font-size: 2rem;
+  left: 5px;
+  top: 5px;
+}
+.form-cadastro-email .container .form-cadastro .campo-form.person:before {
+  content: "\f007";
+}
+.form-cadastro-email .container .form-cadastro .campo-form.mail:before {
+  content: "\f0e0";
+}
+.form-cadastro-email .container .form-cadastro .campo-form.cupom:before {
+  content: "\f145";
+}
+.form-cadastro-email .container .form-cadastro .title-cupom {
+  font-size: 2.3rem;
+  font-family: 'Montserrat';
+  color: #016969;
+  font-weight: 700;
+}
+.form-cadastro-email .container .form-cadastro .subtitle-cupom {
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: 'Montserrat';
+  color: #0b1f36;
+}
+.form-cadastro-email .container .form-cadastro .button-comprar-bombarco {
+  font-family: 'Montserrat';
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  float: none;
+  position: relative;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 30px;
+  background-color: #016969;
+  padding: 12px 20px;
+  border-radius: 55px;
+  border: 0;
+  font-size: 1.6rem;
+  width: 165px;
+  color: white;
+  -webkit-transition: 250ms all ease;
+  -moz-transition: 250ms all ease;
+  -ms-transition: 250ms all ease;
+  -o-transition: 250ms all ease;
+  margin-bottom: 50px;
+}
+.form-cadastro-email .container .form-cadastro .button-comprar-bombarco:before {
+  font-family: FontAwesome;
+  content: "\f13d";
+  display: inline-block;
+  padding-right: 8px;
+  vertical-align: middle;
+  color: #000505;
+  /*-webkit-transition: 500ms all ease;
+  -moz-transition: 500ms all ease;
+  -ms-transition: 500ms all ease;
+  -o-transition: 500ms all ease;*/
+}
+.form-cadastro-email .container .form-cadastro .button-comprar-bombarco:hover {
+  background-color: #47afaf;
+}
+.form-cadastro-email .container .form-cadastro .button-comprar-bombarco:hover:before {
+  /*-webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);*/
+}
+
+.person {
+  background: url(/themes/bombarcoshop/img/icon-name.png) no-repeat scroll 8px 13px;
+  padding-left:30px;
+}
+
+.mail {
+  background: url(/themes/bombarcoshop/img/icon-mail.png) no-repeat scroll 8px 13px;
+  padding-left:30px;
+}
+
+.cupom {
+  background: url(/themes/bombarcoshop/img/icon-cupom.png) no-repeat scroll 8px 13px;
+  padding-left:40px !important;
+}
+
+.preloader{display:none;z-index:99999;width:100%;height:100%;position:fixed;top:0;left:0;text-align:center;background:rgba(255,255,255,0.75)}.preloader img{margin:0 auto;position:absolute;top:50%;left:50%}
+
+ @media screen and (orientation:portrait) {  
+
+    .swiper-container {
+    /*width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40%;
+    display: none;
+    margin-top: 0 !important;*/
+    height: 20%;
+
+  }
+
+ }
+ @media screen and (orientation:landscape) {  
+      .swiper-container {
+        /*width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 40%;
+        display: none;
+        margin-top: 0 !important;*/
+        height: 60%;
+
+      }
+ }
+
+
+@media (max-width: 900px) {
+
+  ul#col-mapa {
+
+    width: 100%;
+  }
+
+  #container-footer, #news {
+    display: none;
+  }
+
+  .section-contents-list .container .title-contents-list {
+    padding-left: 15px;
+  }
+
+  #cadastro {
+    float: left;
+    position: relative;
+    width: 100%;
+  }
+
+  .redes {
+    float: left;
+    position: relative;
+    width: 100%;
+  }
+
+  .section-contents-list .container .column-contents .contents-list .item-list small {
+    display: block;
+    margin: 10px auto;
+    font-size: 1.1rem;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .contents-list {
+    padding: 10px;
+  }
+
+  .section-contents-list .container .title-contents-list {
+    font-size: 2rem;
+  }
+
+  .section-about-the-ebook .container .wrapper-preco-post-about .left-side-price {
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .section-about-the-ebook .container .wrapper-preco-post-about .right-side-price {
+    text-align: center;
+  }
+
+  .section-about-the-ebook {
+    padding: 25px;
+    text-align: center;
+    /*margin-top: 50px;*/
+  }
+
+
+
+
+  #header_site .container .logo-header {
+    z-index: 10;
+    position: relative;
+    width: 150px;
+  }
+
+  .redes p {
+    float: left;
+  }
+
+  .redes ul {
+    float: left;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .redes ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 20px 20px 0 20px;
+  }
+
+}

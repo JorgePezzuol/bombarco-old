@@ -1,0 +1,214 @@
+<div class="form">
+
+
+<?php $form = $this->beginWidget('GxActiveForm', array(
+	'id' => 'banners-form',
+	'enableAjaxValidation' => true,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
+	'enableClientValidation'=>true,
+	'clientOptions' => array('validateOnSubmit'=>true),
+));
+?>
+	<div class="line-admin-top">
+		<div class="container">
+			<p class="text2-admin-form">
+				<?php echo Yii::t('app', 'Campos com '); ?> <span class="required">*</span> <?php echo Yii::t('app', 'são obrigatórios'); ?>.
+			</p>
+		</div>
+	</div>
+
+<div class="line-admin-cad-mod">
+	<div class="container">
+			<!-- erros -->
+			<?php echo $form->errorSummary($model); ?>
+			<?php echo $form->errorSummary($usuario); ?>
+
+		<div class="linha-admin-form">
+			<div class="container">
+
+			 	<div class="box-admin-form" id="select-usuario">
+					<span class="text-admin-form"><b>E-mail do usuário</b></span>
+					<div class="embarcacao_macros_id">
+						<?php echo $form->dropDownList($model, 'usuarios_id', GxHtml::listDataEx(Usuarios::model()->findAll(array('order'=>'email asc'))), array('empty'=>'Selecione', 'id'=>'id_usuario', 'class'=>'select-anuncio-pad')); ?>
+					</div>
+					<div class="errorMessage" id="error-id-usuario"></div>
+				</div><!-- row -->
+
+				<div class="box-admin-form">
+					<span class="text-admin-form">Novo Usuário</span>
+					 <div class="div-cb-admin-up2">
+						<input type="checkbox" id="check-novo-usuario" name="check-novo-usuario"/>
+					</div>
+				</div><!-- row -->
+
+				<div id="hidden-novo-usuario" style="display:none;">
+					<div class="box-admin-form">
+						<span class="text-admin-form"><b>E-mail do usuário*</b></span>
+						<?php echo $form->textField($usuario, 'email', array('maxlength' => 100, 'class'=>'campo-admin-form')); ?>
+						<div class="errorMessage" id="error-email"></div>
+					</div>
+
+					<div class="box-admin-form">
+						<span class="text-admin-form"><b>Senha*</b></span>
+						<?php echo $form->passwordField($usuario, 'senha', array('maxlength' => 100, 'value'=>'','class'=>'campo-admin-form')); ?>
+						<div class="errorMessage" id="error-senha"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="linha-admin-form">
+			<div class="container">
+
+				<div class="box-admin-form">
+					<span class="text-admin-form"><b>Categoria do Banner*</b></span>
+					<div class="embarcacao_macros_id">
+						<?php echo $form->dropDownList($model, 'embarcacao_macros_id', GxHtml::listDataEx(EmbarcacaoMacros::model()->findAllAttributes(null, true)), array('empty'=>'Selecione','class'=>'select-anuncio-pad')); ?>
+					</div>
+					<div class="errorMessage" id="error-macro"></div>
+				</div><!-- row -->
+
+				<div class="box-admin-form">
+					<span class="text-admin-form"><b>Inicio*</b></span>
+					<?php
+						$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						    'name'=>'Banners[inicio]',
+						    'options'=>array(
+						    	'dateFormat'=>'dd/mm/yy',
+						    	'timeFormat'=>'hh:mm:ss'
+						    ),
+						    'language'=> 'pt-BR',
+						    'htmlOptions'=>array(
+						        'style'=>'',
+						        'class'=>'campo-admin-form',
+						    ),
+
+						));
+					?>
+				<div class="errorMessage" id="error-inicio"></div>
+				</div><!-- row -->
+
+
+				<div class="box-admin-form">
+					<span class="text-admin-form"><b>Fim*</b></span>
+					<?php
+						$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						    'name'=>'Banners[fim]',
+
+						    'options'=>array(
+						    	'dateFormat'=>'dd/mm/yy',
+						    	'timeFormat'=>'hh:mm:ss'
+						    ),
+						    'language'=> 'pt-BR',
+						    'htmlOptions'=>array(
+						        'style'=>'',
+						        'class'=>'campo-admin-form'
+						    ),
+
+						));
+					?>
+					<div class="errorMessage" id="error-fim"></div>
+				</div><!-- row -->
+			</div>
+		</div>
+
+		<div class="linha-admin-form">
+			<div class="container">
+				<div class="box-admin-form">
+					<span class="text-admin-form"><b>Posição*</b></span>
+					<div class="embarcacao_fabricantes_id">
+						<?php echo $form->dropDownList($model, 'local', array(''=> 'Selecione',
+						Banners::TOPO => 'topo',
+						Banners::HORIZONTAL  => 'horizontal',
+						Banners::LATERAL  => 'lateral',
+						),array('class'=>'select-anuncio-pad')); ?>
+					</div>
+					<div class="errorMessage" id="error-local"></div>
+				</div><!-- row -->
+					<div class="box-admin-form">
+						<span class="text-admin-form"><b>Link</b></span>
+						<?php echo $form->textField($model, 'link', array('maxlength' => 100, 'value'=>'','class'=>'campo-admin-form')); ?>
+						<div class="errorMessage" id="error-link"></div>
+					</div>
+					<div class="box-admin-form">
+					</div>
+
+			</div>
+		</div>
+
+		<div class="linha-admin-form" id="div-imagens">
+			<div class="container">
+				<div class="box-admin-form6" id="div-imagem" style="width:260px">
+
+					<span class="text-admin-form"><b>Imagem Fechada*</b></span>
+					<div id="div-preview-logo" style="margin-top:45px">
+
+						<?php
+
+							echo $form->fileField($model, 'imagem', array('id' => 'file-imagem'),array('class'=>'btn-file'));
+							echo'<a href="#" class="btn-file2">Adicionar</a>';
+							if($model->imagem != '') {
+
+								$src = Yii::app()->baseUrl . '/public/banners/'.$model->imagem;
+
+								//echo '<img id="img-preview-imagem" src="'.$src.'" class="img-pvw-admin img-banners img-banners" />';
+							}
+							else {
+								//echo '<img id="img-preview-imagem" class="img-pvw-admin img-banners" />';
+							}
+
+						?>
+					</div>
+					<div class="errorMessage2" id="error-imagem"></div>
+				</div><!-- row -->
+				<div class="box-admin-form6" id="div-imagem-topo" style="width:260px">
+					<span class="text-admin-form"><b>Imagem Aberta*</b></span>
+						<div id="div-preview-logo" style="margin-top:45px">
+
+							<?php
+
+								echo $form->fileField($model, 'imagem_topo', array('id' => 'file-imagem-topo'));
+								echo'<a href="#" class="btn-file2">Adicionar</a>';
+								if($model->imagem_topo != '') {
+
+									$src = Yii::app()->baseUrl . '/public/banners/'.$model->imagem_topo;
+
+									//echo '<img id="img-preview-imagem-topo" src="'.$src.'" class="img-pvw-admin img-banners" />';
+								}
+								else {
+									//echo '<img id="img-preview-imagem-topo" class="img-pvw-admin img-banners" />';
+								}
+
+							?>
+
+						</div>
+						<div class="errorMessage2" id="error-imagem-topo"></div>
+				</div>
+				<div class="box-admin-form6">
+					<div class="texts-info-banners">
+						<span class="text-images2">Os banners devem conter os seguintes tamanhos:</span>
+						<span class="text-images2">Topo fechado: 1190 x 70;</span>
+						<span class="text-images2">Topo aberto: 1190 x 460;</span>
+						<span class="text-images2">Lateral: 200 x 446;</span>
+						<span class="text-images2">Horizontal: 728 x 90.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="line-admin-cad-mod">
+	<div class="linha-admin-form">
+		<div class="container">
+			<div class="box-admin-form" style="margin-top:10px">
+				<?php
+				echo GxHtml::submitButton(Yii::t('app', 'Cadastrar'), array('class'=>'botao-cad-admin', 'id'=>'btn-form-banner'));
+				$this->endWidget();
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div><!-- form -->

@@ -1,0 +1,671 @@
+<?php
+	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/contato.js', CClientScript::POS_END);
+	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/jquery-mask.js', CClientScript::POS_END);
+	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/elevatezoom.js?784', CClientScript::POS_END);
+	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/embarcacoes_detalhe.js?2355', CClientScript::POS_END);
+
+
+	$usuario_logado = Usuarios::getUsuarioLogado();
+
+	$modelo = $model->embarcacaoModelos;
+	$fabricante = $model->embarcacaoModelos->embarcacaoFabricantes;
+
+	// usuario dono da embarc
+	$usuarioDonoEmbarc = Usuarios::model()->findByPk($idUsuarioDonoEmbarc);
+?>
+
+<!-- estatísticas / só aparecem se o usuário ser o dono da embarcação -->
+<?php if(Yii::app()->user->id == $idUsuarioDonoEmbarc):?>
+	<section id="menu-acesso">
+		<?php $this->renderPartial('/minhaConta/menu'); ?>
+		<br class="clr">
+	</section>
+
+	<section id="estatisticas">
+
+		<div class="estatisticas-box">
+			<div class="container">
+				<div class="estatisticas-cell">
+					<span class="cell-title">Contatos</span>
+					<span class="cell-result"><?php echo number_format(Embarcacoes::totalizarMensagens(Yii::app()->user->id, $model->id, 'catalogo'),0,",",".");?></span>
+				</div>
+				<div class="estatisticas-cell">
+					<span class="cell-title">Cliques:</span>
+					<span class="cell-result"><?php echo number_format(Embarcacoes::totalizarCliques(Yii::app()->user->id, $model->id, 'catalogo'),0,",",".");?></span>
+				</div>
+
+				<div class="estatisticas-cell">
+					<a class="bt-action" href="<?php echo Yii::app()->createUrl('embarcacoes/update', array('id'=>$model->id));?>">Editar</a>
+				</div>
+
+				<br class="clear">
+			</div>
+		</div>
+	</section>
+<?php endif;?>
+
+<section class="content estaleiro-embarcacao">
+	<div class="line-deemb1">
+		<div class="container">
+			<div class="box-deemb1">
+				<div class="quadro-l1-deemb1">
+					<span class="text-top-deemb" style="margin-top:30px !important"><a href="<?php echo Yii::app()->homeUrl;?>">Home</a> > <a href="<?php echo Yii::app()->createUrl("estaleiros");?>" style="color:#000;">Estaleiros</a> > <a href="<?php echo $pag_estaleiro;?>"><?php echo $fabricante->titulo;?></a></span>
+					<div class="search-deemb">
+
+						<?php echo CHtml::form(array('site/url'), 'get', array('id'=>'form-search', 'name'=>'buscando')); ?>
+							<input name="buscando" placeholder="Buscar <?php echo EmbarcacaoMacros::$macro[$fabricante->embarcacao_macros_id] ?>" class="terms-deemb" type="text">
+							<input class="find-deemb" type="submit">
+							<input type="hidden" name="macro" value="<?php echo EmbarcacaoMacros::$macro_by_slug[$model->embarcacaoMacros->alias]; ?>"/>
+						<?php echo CHtml::endForm(); ?>
+
+					</div>
+				</div>
+				<div class="quadro-l1-deemb2">
+
+					<a href="<?php echo $pag_estaleiro;?>">
+						<?php
+							$imagem = Yii::app()->request->baseUrl.'/img/sem_foto_bb.jpg';
+							if($fabricante->logo != null) {
+								$imagem = Yii::app()->request->baseUrl.'/public/fabricantes/'.$fabricante->logo;
+								echo '<img class="bg-img-deemb" alt="'.$fabricante->titulo.'" title="'.$fabricante->titulo.'" src="'.$imagem.'"/>';
+							} else {
+								echo '<img class="bg-img-deemb" src="'.$imagem.'"/>';
+							}
+						?>
+					</a>
+
+				</div>
+				<div class="quadro-l1-deemb3">
+					<h1 class="title-emb-deemb"><?php echo $fabricante->titulo . ' '. $modelo->titulo; ?></h1>
+					<span class="subtitle-emb-deemb">
+							<?php
+								// exibe titulo, caso tenha e esteja pago
+								if($flgTitulo) {
+									echo '<b>'.$model->titulo.'</b>';
+								}
+							?>
+					</span>
+				</div>
+				<div class="quadro-l1-deemb4">
+					 <a class="botao-deemb-1" href="<?php echo Yii::app()->createUrl('comparador/comparar', array('id_embarcacao'=>$model->id));?>" id="botao-deemb1" style="display:inline ; margin-left:70px;">Comparar</a>
+					<!-- <a class="botao-deemb-2" id="botao-deemb1">Compartilhar</a>
+					 <a class="botao-deemb-3 add-favoritos" id="add-favoritos">Adicionar aos Favoritos</a>
+					 <i class="icone-favorito-detemba"></i>-->
+				</div>
+				<div class="quadro-l1-deemb5">
+					<a href="#">
+
+						<?php
+							$imagem = Yii::app()->request->baseUrl.'/img/sem_foto_bb.jpg';
+							if($model->imagemprincipal != null) {
+								$imagem = Yii::app()->request->baseUrl.'/public/embarcacoes/'.$model->imagemprincipal;
+								echo '<img class="bg-img-slide-deemb" alt="'.$fabricante->titulo.' '.$model->embarcacaoModelos->titulo.'" title="'.$fabricante->titulo.' '.$modelo->titulo.'" src="'.$imagem.'">';
+							} else {
+								echo '<img class="bg-img-slide-deemb" src="'.$imagem.'">';
+							}
+							
+						?>
+					</a>
+					<div id="div-deemb1">
+						<ul class="slide-deemb">
+							<?php
+								for($i = 0; $i < count($model->embarcacaoImagens); $i++) {
+									echo '<li class="category-deemb">';
+										echo '<a href="#" class="img-thumbnail-emb">';
+											echo '<img class="img-deemb-slide" src="'.Yii::app()->request->baseUrl.'/public/embarcacoes/'.$model->embarcacaoImagens[$i]->imagem.'"/>';
+										echo '</a>';
+									echo '</li>';
+								}
+							?>
+						</ul>
+					</div>
+				</div>
+
+				<div class="quadro-l1-deemb6" >
+					<?php
+						echo '<div class="quadro-l1-deemb6b "style ="border-top: 0px;">
+								<div class="div-info-quadros-view1">
+								<span class="text-fixo-deemb-est">A partir de:</span>
+								</div>
+								<div class="div-info-quadros-view2">
+								<span class="text-dnmc-deemb1">';
+
+									if(empty($model->valor) || $model->valor == '0.00') {
+										echo 'R$ Não informado';
+									} else {
+										echo 'R$ '. number_format($model->valor, 2, ",", ".");
+									}
+
+							echo '</span>
+								</div>
+						</div>';
+					?>
+
+					<?php
+						if(!empty($modelo->embarcacaoTipos->titulo)) {
+							echo '<div class="quadro-l1-deemb6b" >
+								<div class="div-info-quadros-view1">
+								<span class="text-fixo-deemb-est">Tipo:</span>
+								</div>
+								<div class="div-info-quadros-view2">
+								<span class="text-dnmc-deemb1">';
+									echo $modelo->embarcacaoTipos->titulo;
+							echo '</span>
+								</div>
+							</div>';
+						}
+					?>
+
+					<?php
+						if($modelo->comprimento != '0.00' && $fabricante->embarcacao_macros_id != 1 && $modelo->comprimento != "") {
+							echo '<div class="quadro-l1-deemb6b">
+									<div class="div-info-quadros-view2" >
+										<span class="text-fixo-deemb-est">Comprimento: </span>
+									</div>
+								 <div class="div-info-quadros-view1"style="width:200px">
+								  <span class="text-dnmc-deemb1">';
+									echo ($modelo->comprimento + 0) . ' m';
+							echo '</span>
+								</div>
+							</div>';
+						}
+					?>
+
+
+					<?php
+						if($modelo->boca != '0.00' && $fabricante->embarcacao_macros_id != 1 && $modelo->boca != "") {
+							echo '<div class="quadro-l1-deemb6b">
+									<div class="div-info-quadros-view2" >
+										<span class="text-fixo-deemb-est">Boca: </span>
+									</div>
+								 <div class="div-info-quadros-view1"style="width:200px">
+								  <span class="text-dnmc-deemb1">';
+									echo $modelo->boca . ' m';
+							echo '</span>
+								</div>
+							</div>';
+						}
+					?>
+
+					<?php
+						if($modelo->tamanho != null && $fabricante->embarcacao_macros_id != 1 && $modelo->tamanho != "") {
+							echo '<div class="quadro-l1-deemb6b">
+									<div class="div-info-quadros-view1">
+									<span class="text-fixo-deemb-est">Tamanho:</span>
+									</div>
+									<div class="div-info-quadros-view2">
+									<span class="text-dnmc-deemb1">';
+										echo number_format($modelo->tamanho, 0). ' pés';
+									echo '</span>
+									</div>
+							</div>';
+						}
+					?>
+
+					<?php
+					if ($modelo->pedireito != '0.00' && $fabricante->embarcacao_macros_id != 1 && $modelo->pedireito != "") {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view1">
+									<span class="text-fixo-deemb-est">Pé Direito:</span>
+								</div>
+								<div class="div-info-quadros-view2">
+								<span class="text-dnmc-deemb1">';
+								echo  ($modelo->pedireito + 0) . ' m';
+							echo '</div>';
+						echo'</div>';
+					}
+					?>
+
+					<!--Linhas novas-->
+					<?php
+					if ($modelo->tanquecombustivel != "0.00" && $modelo->tanquecombustivel != null && $fabricante->embarcacao_macros_id != 1) {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view2" >
+								<span class="text-fixo-deemb-est">Combustível: </span>
+								</div>
+								<div class="div-info-quadros-view1" style="width:200px">
+								<span class="text-dnmc-deemb1">';
+								echo $modelo->tanquecombustivel;
+						echo '</div>';
+					}
+					?>
+
+
+					<!--Linhas novas-->
+					<?php
+					if (strlen($modelo->passageiros) > 0 && $fabricante->embarcacao_macros_id != 1) {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view2" >
+								<span class="text-fixo-deemb-est">Número de Passageiros: </span>
+								</div>
+								<div class="div-info-quadros-view1" style="width:200px">
+								<span class="text-dnmc-deemb1">';
+								echo $modelo->passageiros;
+							echo '</div>';
+						echo '</div>';
+					}
+					?>
+
+
+					<?php
+					if ($modelo->tanqueagua != "0.00" && $modelo->tanqueagua != null && $fabricante->embarcacao_macros_id != 1) {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view2" >
+								<span class="text-fixo-deemb-est">Tanque de Água: </span>
+								</div>
+								<div class="div-info-quadros-view1" style="width:200px">
+								<span class="text-dnmc-deemb1">';
+								echo $modelo->tanqueagua;
+							echo '</div>';
+						echo '</div>';
+					}
+					?>
+
+
+					<?php
+					if ($modelo->ncamarotes != 0 && $modelo->ncamarotes != null) {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view2" >
+								<span class="text-fixo-deemb-est">Camarote: </span>
+								</div>
+								<div class="div-info-quadros-view1" style="width:200px">
+								<span class="text-dnmc-deemb1">';
+								echo $modelo->ncamarotes;
+							echo '</div>';
+						echo '</div>';
+					}
+					?>
+
+					<!--<?php
+					if (isset($model->motores)) {
+						echo '<div class="quadro-l1-deemb6b">
+								<div class="div-info-quadros-view2">
+								<span class="text-fixo-deemb-est">Motorização:</span>
+								</div>
+								<div class="div-info-quadros-view1" style="width:200px">
+								<span class="text-dnmc-deemb1">';
+						if ($fabricante->embarcacao_macros_id == EmbarcacaoMacros::$macro_by_slug['jetski']) {
+							echo $modelo->motor_de_fabrica;
+						} else {
+							if (count($model->motores) > 0) {
+								echo count($model->motores) . 'x - ' . $model->motores[0]->motorModelos->motorFabricantes->titulo . ' ' . $model->motores[0]->motorModelos->titulo . ' ' .$model->motores[0]->motorModelos->potencia . 'HP ' .$model->motores[0]->horas. 'h';
+							}
+							else {
+								echo 'Não informado';
+							}
+						}
+							echo '</div>';
+						echo '</div>';
+					}
+					?> -->
+					<!-- Linhas novas -->
+
+					<?php
+						if(!empty($modelo->pesocasco) && $fabricante->embarcacao_macros_id != 1) {
+							echo '<div class="quadro-l1-deemb6b">
+									<div class="div-info-quadros-view1">
+									<span class="text-fixo-deemb-est">Peso do Casco: </span>
+									</div>
+									<div class="div-info-quadros-view2">
+									<span class="text-dnmc-deemb1">';
+										echo $modelo->pesocasco . ' Kg';
+									echo '</span>
+								</div>
+							</div>';
+						}
+					?>
+
+					<?php
+						if($modelo->calado != "0.00" && $modelo->calado != null && $fabricante->embarcacao_macros_id != 1) {
+							echo '<div class="quadro-l1-deemb6b">
+									<div class="div-info-quadros-view1">
+									<span class="text-fixo-deemb-est">Calado: </span>
+									</div>
+									<div class="div-info-quadros-view2">
+									<span class="text-dnmc-deemb1">';
+										echo $modelo->calado . ' m';
+							  echo '</span>
+								</div>
+							</div>';
+						}
+					?>
+
+					<!-- botao de contato -->
+					
+
+					 <?php if ($model->status == Embarcacoes::ACTIVE): ?>
+
+	                    <div class="quadro-l1-deemb8">
+							<a class="botao-deemb-contato btn-lbox" data-lbox="#lbox-detemba" id="btn-contato-detemba" onclick="_gaq.push(['_trackEvent', 'detalhe-emb', 'click', 'ENTRE EM CONTATO']);">ENTRE EM CONTATO</a>
+							<icon class="icon8-deemb"></icon>
+						</div>
+
+	                <?php else: ?>
+
+	                    <?php $status_class = ($model->status == Embarcacoes::SOLD) ? 'sold' : 'expired'; ?>
+	                    <?php $status_txt = ($model->status == Embarcacoes::SOLD) ? 'Anúncio Vendido!' : 'Anúncio Indisponível'; ?>
+
+	                    <div class="quadro-l1-deemb8">
+	                        <div class="anuncio-view-status <?php echo $status_class; ?>"><?php echo $status_txt; ?></div>
+	                        <icon class="anuncio-view-icon"></icon>
+	                    </div>
+	                    
+	                <?php endif ?>
+
+				</div>
+					<!-- <div class="quadro-l1-deemb7">
+						<div id="div-deemb1">
+							<ul class="slide-deemb">
+								<?php
+									/*for($i = 0; $i < count($model->embarcacaoImagens); $i++) {
+										echo '<li class="category-deemb">';
+											echo '<a href="#" class="img-thumbnail-emb">';
+												echo '<img class="img-deemb-slide" src="'.Yii::app()->request->baseUrl.'/public/embarcacoes/'.$model->embarcacaoImagens[$i]->imagem.'"/>';
+											echo '</a>';
+										echo '</li>';
+									}*/
+								?>
+							</ul>
+						</div>
+
+					</div> -->
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div class="line-deemb2">
+		<div class="container">
+			<div class="box-deemb2">
+
+				<?php
+	                if ($model->descricao != "") {
+
+	                    echo '<div class="quadro-deemb" style="margin-top: 100px;">
+	                            <h2 class="title">Descrição da embarcação</h2>
+	                            <span class="text">';
+	                    echo $model->descricao;
+	                    echo '  </span>
+	                          </div>';
+	                }
+                ?>
+
+
+				<?php
+					// motores
+					if($fabricante->embarcacao_macros_id != Anuncio::$_categoria_embarcacao['JETSKI']) {
+
+						if(count($model->motores) > 0) {
+
+							echo '<div class="quadro-l2-deemb1">
+								<div class="div-title-bloco-l2-deemb">
+									<h2 class="title-l2-bloco-deemb">Motorização</h2>
+								</div>
+								<div class="div-text-bloco-l2-deemb">
+									<span class="text-l2-bloco-deemb">';
+
+
+										echo 'Quantidade de motores: '.count($model->motores);
+										echo '<br/><br/>';
+										$motor = $model->motores[0];
+										echo 'Modelo: '.$motor->motorModelos->titulo;
+										echo ' / ';
+										echo 'Potência: '.$motor->motorModelos->potencia. ' HP';
+										echo ' / ';
+										echo 'Tipo: '.$motor->motorModelos->motorTipos->titulo;
+										echo ' / ';
+										echo 'Fabricante: '. $motor->motorModelos->motorFabricantes->titulo;
+										echo ' / ';
+
+									echo '</span>
+								</div>
+							</div>';
+						}
+
+						else {
+								echo '<div class="quadro-l2-deemb1">
+								<div class="div-title-bloco-l2-deemb">
+									<h2 class="title-l2-bloco-deemb">Motorização</h2>
+								</div>
+								<div class="div-text-bloco-l2-deemb">
+									<span class="text-l2-bloco-deemb">';
+										echo 'Não foi informado o motor ou não possui.';
+									echo '</span>
+								</div>
+							</div>';
+						}
+					}
+
+					// jetski
+					else {
+						if($modelo->motor_de_fabrica != null) {
+
+							echo '<div class="quadro-l2-deemb1">
+								<div class="div-title-bloco-l2-deemb">
+									<h2 class="title-l2-bloco-deemb">Motorização</h2>
+								</div>
+								<div class="div-text-bloco-l2-deemb">
+									<span class="text-l2-bloco-deemb">';
+										echo $modelo->motor_de_fabrica;
+									echo '</span>
+								</div>
+							</div>';
+						}
+						else {
+							echo '<div class="quadro-l2-deemb1">
+								<div class="div-title-bloco-l2-deemb">
+									<h2 class="title-l2-bloco-deemb">Motorização</h2>
+								</div>
+								<div class="div-text-bloco-l2-deemb">
+									<span class="text-l2-bloco-deemb">';
+										echo 'Não foi informado o motor do jetski';
+									echo '</span>
+								</div>
+							</div>';
+						}
+					}
+				?>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		
+		<div class="quadro-l3-deemb3 emba-esta">
+	        <div class="quadro-l3-deemb3b">
+	            <a href="#"><img src="<?php echo Yii::app()->createUrl('img/logo-unifisa.png'); ?>" alt="Unifisa"></a>
+	        </div>
+	        <div class="quadro-l3-deemb3c">
+	            <div class="div-title-bloco3-l3-deemb">
+	                <span class="title-l3-bloco2-deemb">Pensando em consórcio?</span>
+	                <br>
+	                <span class="sub-title">É possível comprar barcos e lanchas em até 100 parcelas, sem juros.</span>
+	            </div>
+	        </div>
+	        <div class="quadro-l3-deemb3d">
+	            <a class="botao-deemb-4 btn-lbox" data-lbox="#lbox-detemba2" id="btn-seguro-detemba" onclick="_gaq.push(['_trackEvent', 'detalhe-emb', 'click', 'quero consorcio'])">Fazer cotação</a>
+	        </div>
+	    </div>
+	
+	    <div class="quadro-l3-deemb3 emba-esta">
+                    <div class="quadro-l3-deemb3b">
+                        <a href="#"><img src="<?php echo Yii::app()->createUrl('img/logo-alfa.png'); ?>" alt="Alfa Financeira"></a>
+                    </div>
+                    <div class="quadro-l3-deemb3c">
+                        <div class="div-title-bloco3-l3-deemb">
+                            <span class="title-l3-bloco2-deemb">Precisando financiar?</span>
+                            <br>
+                            <span class="sub-title">Financiar é uma das maneiras mais rápidas para obter a embarcação que você quer.</span>
+                        </div>
+                    </div> 
+                    <div class="quadro-l3-deemb3d">
+                        <a class="botao-deemb-4 btn-lbox" data-lbox="#lbox-detemba3" id="btn-financ-detemba">Fazer cotação</a>
+                    </div>
+                </div>
+
+	</div>
+
+
+
+	<!-- semelhantes -->
+	<?php
+
+          
+		if(count($embarcacoes_semelhantes) > 0) {
+			$this->renderPartial('_embarcacoes_semelhantes', array('embarcacoes_semelhantes'=>$embarcacoes_semelhantes));
+		}
+	?>
+
+		<br/>
+
+	<!-- mais deste anunciante -->
+	<?php
+
+		if(
+		   isset($usuarioDonoEmbarc->empresases) &&
+		   isset($model->planoUsuarios) &&
+		   isset($model->planoUsuarios->planos) &&
+		   $usuarioDonoEmbarc->empresases->destaque == 1 &&
+		   $model->planoUsuarios->planos->gratuito == 0 &&
+		   count($embarcacoes) > 0
+		   )
+			$this->renderPartial('_embarcacoes_anunciante', array('embarcacoes'=>$embarcacoes));
+	?>
+
+
+	<div class="lbox-ag" id="lbox-detemba">
+		<div class="texts-lbox-ag">
+			<input type="button" id="close-form-contato" class="fechar-form close" value="X">
+			<span class="ev-titleb">Envie uma mensagem para o vendedor desta embarcação</br></span>
+			<span id="erro-contato" style="color:red;"></span>
+		</div>
+		<div id="erro-contato-anunciante" class="div-sucess-lbox"></div>
+		<div class="form-nome-ag">
+			<input placeholder="Seu nome"id="nome-contato-anunciante" value="<?php echo (!empty($usuario_logado))?$usuario_logado->nome:''; ?>" class="terms-ag-1" type="text" required="required">
+		</div>
+		<div class="form-nome-ag">
+			<input placeholder="Seu e-mail" value="<?php echo (!empty($usuario_logado))?$usuario_logado->email:''; ?>" id="email-contato-anunciante" class="terms-ag-1" type="text" required="required">
+		</div>
+		<div class="form-nome-ag">
+			<input placeholder="Telefone" value="<?php echo (!empty($usuario_logado))?$usuario_logado->celular:''; ?>" id="telefone-contato-anunciante" class="terms-ag-1" type="tel">
+		</div>
+		<div class="form-nome-ag">
+			<textarea style="height:130px; width:365px;" id="mensagem-contato-anunciante" class="terms-ag-1" placeholder="Mensagem" required="required"></textarea>
+		</div>
+		<input type="text" name="j8BSVuvy" class="j8BSVuvy" value="" style="display:none !important;" />
+		<input type="button" onclick="_gaq.push(['_trackEvent', 'Lightbox-form', 'click', 'Enviar Mensagem']); adwords_conversor('pl26CITUvFgQkLPC4wM');" name="botao-cadastrar-form" class="botao-cadastrar-form" id="btn-contato-anunciante" value="ENVIAR MENSAGEM">
+	</div>
+
+
+	<!-- Lightbox Seguradora -->
+    <div class="lbox-ag" id="lbox-detemba2">
+        <div class="texts-lbox-ag">
+            <input type="button" id="close" class="fechar-form close" value="X" style="margin-top:5px">
+            <img src="<?php echo Yii::app()->createUrl('img/logo-unifisa.png'); ?>" alt="Unifisa">
+            <p><strong>Consulte os especialistas da Unifisa</strong> <br> e encontre um plano perfeito pra você: </p>
+        </div>
+        <form id="form_cons" action="<?php echo Yii::app()->createUrl('contatos/partners'); ?>" method="POST" class="data-ax-form">
+            <div class="form-nome-ag">
+                <input name="cons_nome" placeholder="Seu nome*" id="form-1-ag-lb" class="terms-ag-1" value="<?php echo (!empty($usuario_logado))?$usuario_logado->nome:''; ?>" type="text" required="required">
+            </div>
+            <div class="form-nome-ag">
+                <input name="cons_email" placeholder="Seu e-mail*" class="terms-ag-1" type="email" value="<?php echo (!empty($usuario_logado))?$usuario_logado->email:''; ?>" required="required">
+            </div>
+            <div class="form-nome-ag">
+                <input name="cons_phone" placeholder="Seu telefone*" class="terms-ag-1" type="tel" value="<?php echo (!empty($usuario_logado))?$usuario_logado->celular:''; ?>" required="required">
+            </div>
+            <span class="sub-detail">Campos obrigatórios*</span>
+            <input type="text" name="C7RiUSGm" value="" style="display:none !important;" />
+            <input data-form="form_cons" type="button" name="botao-cadastrar-form" class="botao-cadastrar-form botao_contato_partners" value="ENVIAR PEDIDO" onclick="_gaq.push(['_trackEvent', 'detalhe-emb', 'click', 'enviar consorcio'])" />
+            <input type="hidden" name="cons_id" value="<?php echo $model->id; ?>" />
+            <input type="hidden" name="cons_titulo" value="<?php echo $fabricante->titulo . ' ' . $modelo->titulo; ?>" />
+            <input type="hidden" name="cons_valor" value="<?php echo $model->valor; ?>" />
+            <input type="hidden" name="cons_link" value="<?php echo $_SERVER['HTTP_HOST'].Embarcacoes::mountUrl($model); ?>" />
+            <input type="hidden" name="cons_parceiro" value="Unifisa" />
+            <input type="hidden" name="partner_type" value="cons" />
+        </form>
+    </div>
+
+
+    <!-- Lightbox Financeira -->
+    <div class="lbox-ag" id="lbox-detemba3">
+        <div class="texts-lbox-ag">
+            <input type="button" id="close" class="fechar-form close" value="X" />
+            <img src="<?php echo Yii::app()->createUrl('img/logo-alfa.png'); ?>" alt="Alfa Financeira">
+            <p>São prazos com planos de até <br> 60 meses e diversas linhas de crédito: <br> <strong>Consulte um especialista da Alfa Financeira</strong></p>
+        </div>
+        <form id="form_finan" action="<?php echo Yii::app()->createUrl('contatos/partners'); ?>" method="POST" class="data-ax-form">
+            <div class="form-nome-ag">
+                <input name="finan_nome" placeholder="Seu nome*" id="form-1-ag-lb" class="terms-ag-1" value="<?php echo (!empty($usuario_logado))?$usuario_logado->nome:''; ?>" type="text" required="required">
+            </div>
+            <div class="form-nome-ag">
+                <input name="finan_email" placeholder="Seu e-mail*" class="terms-ag-1" type="email" value="<?php echo (!empty($usuario_logado))?$usuario_logado->email:''; ?>" required="required">
+            </div>
+            <div class="form-nome-ag">
+                <input name="finan_phone" placeholder="Seu telefone*" class="terms-ag-1" type="tel" value="<?php echo (!empty($usuario_logado))?$usuario_logado->celular:''; ?>" required="required">
+            </div>
+            <span class="sub-detail">Campos obrigatórios*</span>
+            <input type="text" name="C7RiUSGm" value="" style="display:none !important;" />
+            <input data-form="form_finan" type="button" name="botao-cadastrar-form" class="botao-cadastrar-form botao_contato_partners" value="ENVIAR PEDIDO" />
+            <input type="hidden" name="finan_id" value="<?php echo $model->id; ?>" />
+            <input type="hidden" name="finan_titulo" value="<?php echo $fabricante->titulo . ' ' . $model->embarcacaoModelos->titulo; ?>" />
+            <input type="hidden" name="finan_valor" value="<?php echo $model->valor; ?>" />
+            <input type="hidden" name="finan_link" value="<?php echo $_SERVER['HTTP_HOST'].Embarcacoes::mountUrl($model); ?>" />
+            <input type="hidden" name="finan_parceiro" value="Alfa Financeira" />
+            <input type="hidden" name="partner_type" value="finan" />
+        </form>
+    </div>
+
+
+</section>
+
+
+
+<!-- campos hidden -->
+
+<!-- contem o id da embarcação -->
+<input type="hidden" id="id_embarcacao" value="<?php echo $model->id;?>"/>
+
+<!-- contem a flag que indica se o usuario ja favoritou a embarcação -->
+<?php
+	if($flgJaFavoritou) {
+		// ja favoritou, gerar campo hidden com value 1
+		echo CHtml::hiddenField('flgFavoritou', '1', array('id'=>'flgFavoritou'));
+	}
+	else {
+		echo CHtml::hiddenField('flgFavoritou', '0', array('id'=>'flgFavoritou'));
+	}
+
+	// id do usuario dono da embarcação
+	echo CHtml::hiddenField('idUsuarioDonoEmbarc', $idUsuarioDonoEmbarc, array('id'=>'idUsuarioDonoEmbarc'));
+
+	// id da embarcação
+	echo CHtml::hiddenField('idEmbarcacao', $model->id, array('id'=>'idEmbarcacao'));
+
+	// email da embarcação
+	echo CHtml::hiddenField('emailEmbarcacao', $model->email, array('id'=>'emailEmbarcacao'));
+
+	// nome destinatário
+	echo CHtml::hiddenField('nome_destinatario', $usuarioDonoEmbarc->nome, array('id' => 'nome-contato'));
+
+	// indica se há usuario logado ou não
+	// 0 => não está logado
+	// 1 => está logado
+	if(!Yii::app()->user->isGuest) {
+		echo CHtml::hiddenField('isGuest', 1, array('id'=>'isGuest'));
+	}
+	else {
+		echo CHtml::hiddenField('isGuest', 0, array('id'=>'isGuest'));
+
+			// form de contato (campo que indica se é uma resposta ao anunciante ou nao (aqui no caso nao é, valor zero então))
+
+	}
+	echo CHtml::hiddenField('resposta', 0, array('id'=>'resposta'));
+
+?>
+

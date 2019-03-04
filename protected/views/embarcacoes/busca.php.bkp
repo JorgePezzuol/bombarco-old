@@ -1,0 +1,343 @@
+<?php
+    Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/numeral.min.js', CClientScript::POS_END);
+            Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/languages.min.js', CClientScript::POS_END);
+            Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/embarcacoes_busca.js?666', CClientScript::POS_END);
+?>
+<section class="content">
+    <?php
+        $this->renderPartial('_form_busca', array('array_view'=>$array_view, 'array_params'=>$array_params, 'breadcrumbs'=>$breadcrumbs));
+    ?>
+
+    <div class="line-white-3-listagem">
+        <div class="container">
+
+            <?php if (count($array_view['embarcacoes']) > 0): ?>
+
+            <div class="checkbox-lis-emb">
+
+
+                <?php if($array_params['busca'] != ""): ?>
+                <div class="resultados-box">
+                    <?php
+                        echo '<span class="resultados-title">Você buscou por "' . $array_params['busca'].'"';
+                        if (count($array_view['embarcacoes']) > 1){
+                            echo '", foram encontrados ' . count($array_view['embarcacoes']) . ' resultados</span>';
+                        } else {
+                            echo ', foi encontrado ' . count($array_view['embarcacoes']) . ' resultado</span>';
+                        }
+                    ?>
+                </div>
+                <?php endif;?>
+
+                <span class="checkbox-text-list3">Ordenação</span>
+                <span class="checkbox-text-list">$</span>
+                <span class="checkbox-text-list2">$$$</span>
+                <form>
+                    <div class="checkbox1">
+                        <input type="radio" id="cb-list" name="teste" class="checkcad1" value="ASC" <?php if(isset($array_params['ordem']) && $array_params['ordem'] == "ASC") echo 'checked'; ?> >
+                    </div>
+                    <div class="checkbox2">
+                        <input type="radio" id="cb-list2" name="teste" class="checkcad1" value="DESC" <?php if(isset($array_params['ordem']) && $array_params['ordem'] == "DESC") echo 'checked'; ?> >
+                    </div>
+                </form>
+            </div>
+            <?php endif ?>
+
+            <?php $empresas_relacionadas = Empresas::anunciosRelacionados(Macros::$macro_by_slug['empresa']); ?>
+            <?php $embarcacoes_relacionadas = Embarcacoes::anunciosRelacionados($array_params['macro']); ?>
+
+            <?php if(count($embarcacoes_relacionadas) > 0 || count($empresas_relacionadas) > 0): ?>
+
+                    <div class="box-cinza-lateral-bb">
+                        <div class="div-title-lateral-anuncios">
+                            <span class="title-lateral-anuncios">Anúncios Patrocinados</span>
+                        </div>
+                        <div class="div-coluna-blocos-list">
+
+
+                            <?php if(count($embarcacoes_relacionadas) > 0): ?>
+
+                                        <div class="bloco-an-re1">
+                                            <div class="title-lw3-lat-listagem">
+
+                                                <span class="title-lw3-lat-list"> Classificados </span>
+                                            </div>
+
+                                            <div class="box-listagem-lat">
+
+                                                <?php foreach ($embarcacoes_relacionadas as $key => $value): ?>
+
+                                                    <ul class="categories-listagem-lat">
+                                                        <li class="category-listagem–lat">
+                                                            <?php echo Embarcacoes::getThumb($value, array('class'=>'bg-img-listagem-lat'), true); ?>
+                                                            <?php
+                                                            // se tiver destaque poe a classe com o selo de destaque
+                                                            if(Embarcacoes::checkTurbo($value, 'destaque_busca'))
+                                                                echo '<i class="faixa-destaque-emba"></i>';
+                                                            ?>
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="textos-lat">
+
+                                                    <?php
+
+                                                        $titulo = "";
+                                                        if(Embarcacoes::checkTurbo($value, "titulo") == true) {
+                                                            $titulo = $value->titulo;
+                                                        }                                                                                                                                                                 
+                                                    ?>
+                                                        <?php echo '<h2 class="text-list-lat-title">'.$value->embarcacaoModelos->embarcacaoFabricantes->titulo . ' ' . $value->embarcacaoModelos->titulo. ' '. '<b>'.$titulo.'</b></h2>'; ?>
+                                                        <span class="text-list-lat-ano"> Ano: </span>
+                                                        <span class="text-list-lat-ano-rnd"> <?php echo Embarcacoes::exibirAnoView($value->ano); ?> </span><br>
+                                                        <span class="text-list-lat-price"><?php echo ($value->valor > 0?"R$ " . number_format($value -> valor, 2, ',', '.'):" R$ não informado"); ?></span>
+                                                    </div>
+
+                                                <?php endforeach ?>
+
+                                            </div>
+                                                
+                                        </div>
+                                <?php endif ?>
+
+                            <?php if(count($empresas_relacionadas) > 0): ?>
+                                    <div class="bloco-an-re2">
+
+                                        <div class="title-lw3-lat2-listagem">
+                                            <span class="title-lw3-lat2-list"> Guia de Empresas </span>
+                                        </div>
+
+
+
+
+                                        <div class="box-listagem-lat2">
+
+                                            
+
+                                            <?php foreach ($empresas_relacionadas as $key => $value): ?>
+
+                                                <ul class="categories-listagem-lat">
+
+                                                    <li class="category-listagem–lat">
+
+                                                        <?php echo Empresas::getThumb($value, Empresas::PATH_IMAGES_EMPRESAS, true, array('class'=>'bg-img-listagem-lat')); ?>
+
+                                                    </li>
+
+                                                </ul>
+
+                                                <div class="textos-lat">
+                                                    <span class="text-list-lat-title"> <?php echo $value->nomefantasia; ?> </span>
+                                                    <!--<span class="text-list-lat-ano">Localizacão: </span>-->
+                                                    <!--<span class="text-list-lat-ano-rnd"> <?php $value->estados->uf; ?> </span>-->
+                                                </div>
+
+                                            <?php endforeach ?>
+
+                                        </div>
+                                    </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+
+            <?php endif ?> 
+
+
+
+            <div class= "box-tabela-bb">
+                <ul class="categories-tabela">
+                <?php
+
+                    foreach($array_view['embarcacoes'] as $embarc) {
+
+                        echo '<li class="category-tabela">';
+
+                            echo Embarcacoes::getThumb($embarc, array('class'=>'bg-img-tabela'), true);                           
+
+                            // se tiver destaque poe a classe com o selo de destaque
+                            if(Embarcacoes::checkTurbo($embarc, 'destaque_busca') == true) {
+                                echo '<i class="faixa-destaque-emba"></i>';
+                            }
+
+                            //HTML BUSCA
+                            echo '<div class="textos-tabela-bb">';
+                                
+                                $titulo = "";
+                                if(Embarcacoes::checkTurbo($embarc, "titulo") == true) {
+                                    $titulo = $embarc->titulo;
+                                }                                                                                                                                                                 
+                                echo '<h2 class="text-tabela-bb-title">'.$embarc->embarcacaoModelos->embarcacaoFabricantes->titulo . ' ' . $embarc->embarcacaoModelos->titulo. ' '. '<b>'.$titulo.'</b></h2>';
+                                
+
+                                if ($embarc->status == Embarcacoes::ACTIVE) {
+
+                                    echo '<h2 class="text-tabela-bb-ano">Ano: <b>'.$embarc->ano.'</b></h2>';
+                                    echo '<h2 class="text-tabela-bb-estado">Estado: <b>' . Embarcacoes::$_estado[$embarc->estado] . '</b></h2>';
+                                    echo '<h2 class="text-tabela-bb-price">';
+                                    echo ($embarc->valor > 0?"R$ " . number_format($embarc -> valor, 2, ',', '.'):"R$ não informado");
+                                    echo '</h2>';
+
+                                    echo '<div  style="cursor:pointer;" class="balao_contato" data-email="'. $embarc->email . '" data-embarcid="'. $embarc->id . '">';
+                                    echo '<img style="cursor:pointer; float:left;" class="balao" data-email="'. $embarc->email . '" data-embarcid="'. $embarc->id . '" src="'. Yii::app()->createUrl("img/icon_chat.png"). '"/>';
+                                    echo '<span style="float:left; margin-left:5px; font-weight:bolder; font-size:13px;">Entre em contato</span>';  
+                                    echo '</div>';
+                                }
+
+                                else {
+
+                                    echo '<h2 class="text-tabela-bb-price">Anúncio vendido</h2>';
+
+                                }
+                                
+                                // echo '<h2 class="text-tabela-bb-ano-rnd">'.$embarc->ano.'</h2>';
+                                // echo '<h2 class="text-tabela-bb-estado-rnd">' . Embarcacoes::$_estado[$embarc->estado] . '</h2>';
+
+                            echo '</div>';
+
+
+                        echo '</li>';
+
+                    }
+                ?>
+                </ul>
+
+
+                <?php if (count($array_view['embarcacoes']) == 0): ?>
+                <div class="resultados-box">
+                    <span class='resultados-title'>Nenhum resultado encontrado.</span>
+                    <span class="resultados-tip">Faça uma nova busca ou navegue nas categorias abaixo.</span>
+                    <a href="<?php echo Yii::app()->createUrl('embarcacoes/lanchas-a-venda');?>" class="resultados-categorias resultados-tip-lancha">Lanchas</a>
+                    <a href="<?php echo Yii::app()->createUrl('embarcacoes/veleiros-a-venda');?>" class="resultados-categorias resultados-tip-veleiro">Veleiros</a>
+                    <a href="<?php echo Yii::app()->createUrl('embarcacoes/jet-skis-a-venda');?>" class="resultados-categorias resultados-tip-jet-skis">Jet Skis</a>
+                    <a href="<?php echo Yii::app()->createUrl('embarcacoes/barcos-pesca-a-venda');?>" class="resultados-categorias resultados-tip-pesca">Pesca</a>
+                </div>
+                <?php endif ?>
+
+            </div>
+
+
+                <?php if (count($array_view['embarcacoes']) == Embarcacoes::LIMIT_SEARCH): ?>
+
+                    <div class="div-btn-carregar-list ax-track-event" data-ax-trackname="btn ver mais listagem">
+                        <a class="botao-carregar-list" id="carregar-list"
+                             data-limit="<?php echo Embarcacoes::LIMIT_SEARCH; ?>"
+                             data-macro="<?php echo $array_params['macro']; ?>"
+                             data-condicao="<?php echo $array_params['condicao']; ?>"
+                             data-fabricante="<?php echo $array_params['fabricante']; ?>"
+                             data-modelo="<?php echo $array_params['modelo']; ?>"
+                             data-preco-min="<?php echo $array_params['preco_min']; ?>"
+                             data-preco-max="<?php echo $array_params['preco_max']; ?>"
+                             data-pes-min="<?php echo $array_params['pes_min']; ?>"
+                             data-pes-max="<?php echo $array_params['pes_max']; ?>"
+                             data-local="<?php echo $array_params['uf']; ?>"
+                             data-tipos="<?php echo $array_params['tipos']; ?>"
+                             data-ordem="<?php echo $array_params['ordem']; ?>"
+                             data-buscando="<?php echo $array_params['busca']; ?>">VER MAIS</a>
+                    </div>
+
+                <?php endif ?>
+                <div class="advertise-home_banner">
+                    <?php echo Banners::loadBanner(Banners::HORIZONTAL, $array_params['macro'], array('width'=>728, 'height'=>90), true); ?>
+                </div>
+                <br class="clear">
+
+        </div>
+
+        <div class="fundo-cinza-lateral"></div>
+    </div>
+
+
+    <?php /*$cpm = Embarcacoes::cpm($array_params['macro']); ?>
+
+    <?php if (count($cpm) > 0): ?>
+
+        <div class="line-white-5-listagem">
+            <div class="container" >
+                <div class="title-lw5-listagem">
+                    <span class="title-lw5-list"> Mais embarcações desta categoria </span>
+                </div>
+
+                <div class="box-listagem">
+                    <ul class="categories-listagem">
+
+                        <?php foreach ($cpm as $key => $value): ?>
+
+                            <li class="category-listagem">
+                                <?php echo Embarcacoes::getThumb($value, array('class'=>'bg-img-listagem-lat','width'=>80, 'height'=>70), true); ?>
+                                <span class="text-box-lis"> <?php echo $value->embarcacaoModelos->titulo; ?> <span>
+                                <span class="price-box-lis"> R$ <?php echo Utils::formataValorView($value->valor); ?> <span>
+                            </li>
+
+                        <?php endforeach ?>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    <?php endif*/ ?>
+
+
+    <?php
+
+        // cookies
+         $email = Yii::app()->request->cookies->contains('email') ? Yii::app()->request->cookies['email']->value : "";
+         $celular = Yii::app()->request->cookies->contains('celular') ? Yii::app()->request->cookies['celular']->value : "";
+         $nome = Yii::app()->request->cookies->contains('nome') ? Yii::app()->request->cookies['nome']->value : "";
+
+    ?> 
+
+
+
+    <div class="div-voltar-ao-topo-list">
+        <a class="botao-voltar-ao-topo-list" id="btn-subir-bb">VOLTAR AO TOPO</a>
+    </div>
+
+
+        <!-- Contato -->
+    <div class="lbox-ag" id="lbox-detemba">
+        <div class="texts-lbox-ag">
+            <input type="button" id="close-form-contato" class="fechar-form close" value="X">
+            <div>
+                <span class="ev-titleb">Envie uma mensagem para o vendedor desta embarcação</br></span>
+                <span id="erro-contato" style="color:red;"></span>
+            </div>
+        </div>
+
+        <div id="erro-contato-anunciante" class="div-sucess-lbox"></div>
+
+        <div class="form-nome-ag nome-contato-anunciante">
+                <input placeholder="Seu nome*"id="nome-contato-anunciante" value="<?php echo $nome; ?>" class="terms-ag-1" type="text" required="required">
+        </div>
+        <div class="form-nome-ag email-contato-anunciante">
+
+                <input placeholder="Seu e-mail*" value="<?php echo $email; ?>" id="email-contato-anunciante" class="terms-ag-1" type="text" required="required">
+        </div>
+        <div class="form-nome-ag telefone-contato-anunciante">
+                <input placeholder="Telefone*" value="<?php echo $celular; ?>" id="telefone-contato-anunciante" class="terms-ag-1" type="tel">
+        </div>
+        <div class="form-nome-ag mensagem-contato-anunciante">
+            <textarea style="height:100px; width:430px;" id="mensagem-contato-anunciante" class="terms-ag-1" placeholder="Mensagem*" required="required"></textarea>
+        </div>
+        <span class="sub-detail">Campos obrigatórios*</span>
+
+        <div class="div-pergunta-partners">
+            <!--<div style="margin-bottom: 3px;">Tenho interesse em:</div>-->
+            <div style="margin-bottom: 10px; padding-left: 30px; font-weight: bold;">Consórcio <input type="checkbox" id="partner_cons" class="checkl1" value="1"></div>
+            <div style="padding-left: 30px; margin-bottom: 10px; font-weight: bold;">Financiamento <input type="checkbox" id="partner_finan" class="checkl1" value="1"></div>
+            <div style="padding-left: 30px; margin-bottom: 10px; font-weight: bold;">Seguro <input type="checkbox" id="partner_seg" class="checkl1" value="1"></div>
+        </div>
+
+        <input type="text" name="j8BSVuvy" class="j8BSVuvy" value="" style="display:none !important;" />
+        <input type="button" name="botao-cadastrar-form" class="botao-cadastrar-form" id="btn-contato-anunciante" value="ENVIAR MENSAGEM" />
+    </div>
+
+
+    <!-- auxilia na hr de mandar a msg de contato -->
+    <input type="hidden" id="idUsuarioDonoEmbarc"/>
+    <input type="hidden" id="nome_destinatario"/>
+    <input type="hidden" id="idEmbarcacao"/>
+    <input type="hidden" id="emailEmbarcacao"/>
+
+</section>

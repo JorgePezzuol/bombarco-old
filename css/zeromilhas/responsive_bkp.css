@@ -1,0 +1,403 @@
+/*
+	CSS Document
+	Theme Name: Zero Milhas Bombarco
+	Theme URI: http://www.zeromilhas.com.br
+	Description: EstilizaÃƒÂ§ÃƒÂ£o Responsiva para o site Zero Milhas do Grupo Bombarco
+	Tags: shelley macedo, frontend, crossbrowser, css, diagramaÃƒÂ§ÃƒÂ£o, responsivo
+	Developer: Shelley Macedo (shelley.macedo@hotmail.com)
+	Version: 1.0 -> 22 janeiro 2018 /*** responsivo, crossbrowser *** /
+*/
+
+
+/* CSS Document */
+@charset "utf-8";
+
+/* IE */
+@supports (-ms-ime-align:auto) {
+
+}
+
+
+/* Media */
+@media (min-width:1921px) {
+	#sliders { background:#242424 }
+	.banner { margin:auto }
+}
+
+@media (min-width:1440px) {
+	.bigboat { background: url(../../img_zeromilhas/img_home.png) no-repeat right -10% top 35%; }
+}
+
+@media (max-width:1200px) {
+	.nav-item { padding: 0 5px!important; font-size: 80%; }
+	.menu .dropdown-menu { padding: 0 10px!important; min-width: auto!important; }
+	.btn-default { padding:11px 8px!important; font-size:12px!important; white-space:normal!important; }
+}
+
+@media (max-width:1024px) {
+	h4 { font-size: 14px; }
+	.counter p , .postagem-descricao b, .contato li, .atendimento p { font-size:14px!important; }
+	.bjqs-caption h3 { font-size: 2rem; line-height: 3rem; }
+	header, .filtros h5 { padding:0 }	
+	.filtros h4 { position: relative; top: initial; bottom: initial; }
+	.btn-padrao-branco { padding:1em; }
+	.card-text { text-align:left; }
+	#destaque .owl-carousel .owl-item img, #destaque .owl-carousel .owl-item video { height: 70px!important; }
+	.anuncio-lateral figcaption{ right:-4em; }
+	.well h2 { font-size:14px; padding-right:initial; }
+	.lista-blocos li { width:23.5%; }
+	.lista-links { column-count: 5; }
+	.questoes .estrelas label { margin: 0 .75rem; }
+	h5 { font-size: 0.78rem; }
+	.slider.slider-horizontal { max-width: 70%; }
+	.anuncio-topo figcaption { left: -3.85em; }
+	.bigboat { background: url(../../img_zeromilhas/img_home.png) no-repeat right --560% top 0; }
+}
+
+@media screen and (min-width:681px) and (max-width:767px) { .lista-barcos .well img { height:210px!important; width:100%; } }
+@media screen and (min-width:681px) and (max-width:991px) { .quadro.hidden-md-down, .links.hidden-md-down { display:block!important; } }
+
+@media (max-width:991px) {
+	.navbar-toggleable-md .form-inline { float:right; }
+	.pagination { margin-bottom:4rem }
+	.dropdown-menu .nav-item.active, .dropdown-menu .nav-item:hover, .dropdown-menu .nav-item:active, .dropdown-menu .nav-link:active { background: transparent; }
+	.card-flutuante { margin: 1em; text-align: center;}
+	#destaque .card-block, #opinioes .card-block { transform:none; margin:auto; }
+	.zebrada, .input-news { width:100%!important; }
+	#opinioes .btn { width: auto!important; display: table; margin: 3em auto; }
+	.lista-links { column-count: 4; }
+	.h6-redes { padding: 1rem; }
+	.redes li a i, .contato li a i { width: 40px; }
+	.dados-edicao { text-align:center!important; margin:1em 0!important; }
+	.dados-edicao p { text-align:center!important; }
+	.card-flutuante { display:table; margin:1em auto; float:none; }
+	.tabela-mensagens .btn-verde-claro { margin-right: 10px; font-size: 0; min-width: 60px; padding-left: 0; padding-top: 0; }
+	.tabela-mensagens .btn-verde-claro i { margin-top: 10px; }
+	.table-anuncios h4, .selecao h4, .filtros h4 { width: 100%; position: relative; bottom: 0; top: 0; }
+	#titulo-subpagina p { max-width: 60%; padding: 1rem 0; }
+	.embarcacoes .btn-padrao-branco { width:auto; margin:10px 0; }
+	.ver-mais { position: relative!important; padding-left: 1rem!important; }
+	.modal .link-normal { padding:0; }
+	.count5 { column-count: 4; }
+	.lista-tipos { margin-top:3em; }
+	.lista-tipos.count5 a, .lista-tipos.count5 a img, .lista-fotos.count5 a, .lista-fotos.count5 a img { width:100%!important; height:auto!important; }
+	.barra-titulo p { text-align:left; }
+	.filtros h4.com-barra-abaixo { top: 0; position: relative; height: auto; margin-bottom: 3rem; }
+	#dados-embarcacao p.w-80 { width:100%; }
+	.ico-youtube { position:relative; }
+	.ico-youtube img {  }
+	.youtube label { display:none; }
+	#dados-embarcacao label:not(.form-check-label), #dados-embarcacao .estiliza-select, #dados-embarcacao .estiliza-select select, .btns-right, .btns-right a { width: 100%!important; }
+	.bloco3 label, .bloco3 input, .bloco3 select { width: 85%; }
+	.campo-dados { width:90%; }
+	.avaliar .card-block { margin:0; width:100%; }
+	.anuncio-topo { display: inline-block; max-width: 100%; }
+	.stylish-input-group { max-width: 96%; }
+	.ul-ordena { margin: 1rem 0!important; width: 100%; max-width: 100%; display: inline-block; }
+	.btn-or { width:100%  }
+	.bigboat { background: url(../../img_zeromilhas/img_home.png) no-repeat right 135% top 0; }
+	.count2-resp { column-count:2 ; }
+	.lista-barcos { width:105%; }
+	.lista-barcos .well img { height:210px!important; }
+	.table-anuncios tr { display: inline-grid; width:100%; }
+	.table-anuncios th, .table-anuncios td { width:100%!important; display: block; }
+	.table-anuncios th:nth-child(1), .table-anuncios td:nth-child(1) { border: 2px solid #DDD; }
+	.table-anuncios tfoot p { width: 100%; position: relative; text-align:center; }
+	.lista-fotos.count5 { column-count: 5; }
+	.lista-barcos .well:hover .mascara-hover .link { padding-right: 0; font-size: 1.5em; }
+}
+ 
+@media screen and (min-width:681px) and (max-width:768px) { .divForm { display:block!important; } }
+
+@media (max-width:768px) {
+	.bjqs-caption { bottom:5% }
+	.volta-topo { bottom: .15em; right: .15em; }
+	.bg-faded h4.com-barra { position: relative; top: initial; bottom: initial; }
+	.lista-5 { display: table; margin: 3em 0; width:100%; }
+	.lista-5 li { width:48%; max-width:initial; text-indent:-2px; line-height: 14px; margin-left: 5px; min-height: 145px; }
+	.topo .navbar { padding-right:0; }
+	.zoomWrapper, .zoomWrapper img, .ZoomContainer, .ZoomContainer * { height:auto!important; position:relative!important; max-width: 100%; }
+	.navbar-toggleable-md .form-inline { float: left; }
+	.modal-footer { display:block }
+	.modal-footer .ver-mais { padding-left: 1rem!important; top:0; }
+	.modal-body .btn-verde.email { text-align: center; width: 100%; height: auto; display: table; white-space: normal; text-align: center; }
+	.modal-body .btn-verde.email i { /*margin: 0; width: 100%;*/ }
+	.btn-facebook { font-size: 11px; }
+	.lista-status li {  display: block!important; clear: both; }
+	.lista-status li:after { display:none!important; }
+	.count5 { column-count: 3; }
+	.lista-fotos.count5 { column-count: 5; }
+	.nav-busca li .btn i { margin-left: 3px; margin-right: 0; }
+	.compensabotaomenu i { margin-left:1rem!important; }
+	.owl-carousel .owl-item img { width: 100%!important; }
+	.lista-blocos li img { height:100px; }
+	.ver-mais { padding-left: 0rem!important; }
+	.nav-detalhes{ display:none; }
+	.divForm .btn-padrao-azul { width:auto!important; min-height:60%; float:right; }
+	.btns-right a.btn-padrao-branco { max-width:45%; float:left; }
+	.btns-right a:last-child { max-width: 45%; float: right; }
+	.colocacao { right: 35px; }
+	.nav-busca .estiliza-select {padding: 0;}
+	/*.nav-busca .estiliza-select select { height:45px; }*/
+	.lista-barcos .well:hover .mascara-hover .link { padding-right: 0; font-size: 1.5em; }
+}
+
+@media (max-width:690px) {
+	.quadro.hidden-md-down, .links.hidden-md-down { display:nonek!important; }
+	.bjqs-caption { visibility: hidden }
+	.owl-dot { width:1rem }
+	.noticias, .card-group { margin:1rem 0 }
+	footer { padding:0; }
+	footer .bloco, .inteiro p, .noticia-normal .titulo-noticia { width: 100%; }
+	footer .bloco { margin-top:2em; }
+	footer .anunciar { margin: 3rem auto 0; display: table; }
+	.bloco:first-child { margin-top:2em; }
+	.topo .navbar, .topo .btn-padrao-azul { width:50%; display: block!important; }
+	.quadro .btn-padrao-branco {  margin: 10px 0; }
+	table:not(.table-anuncios) td { width: 100%; padding: .75rem; display: table; }
+	figure { margin: 2em auto; display: none; }
+	#materias .well img, .owl-carousel .owl-item img { width: 100%!important; height: auto!important; }
+	#materias .well img { width: 42%!important; height: auto!important; }
+	#materias .well h2 { font-size: 12px; padding-right: 5px; }
+	.count2 { column-count: 1; }
+	#opinioes .card { margin:0; padding: 1rem; }
+	.lista-links { column-count: 2; }
+	.h6-redes { margin-top:2rem; }
+	.faixa { text-align:center; }
+	.navbar-brand, #titulo .btn, header .btn-padrao-branco { display:table; margin:1em auto!important; float:none; }
+	.faixa * { margin:1em!important; float:none; }
+	#destaque .owl-carousel.owl-loaded { max-width:80%; margin:1em auto; }
+	.lista-blocos { display: table; margin: 0 auto; }
+	.lista-blocos li { width: 46.5%; max-width: 100%; text-align: center; border-right: 0; margin-bottom: 1rem; }
+	.lista-blocos li img { width: 100%; max-height: 70px; }
+	#titulo .btn, #titulo .breadcumbs { text-align: left; padding:0; float:none; display:table; margin:auto; }
+	#titulo-subpagina p { padding: initial; max-width: 80%; margin-bottom: 5px; font-size: 13px; }
+	#titulo-subpagina h1 { margin-bottom: 0; font-size: 2rem; width: 100%; }
+	#titulo-subpagina h1 img { display: none; }
+	.nav-pills {  display: table; width: 100%; }
+	.nav-pills .nav-link { border:0; }
+	#destaque .owl-carousel .owl-item img, #destaque .owl-carousel .owl-item video, .owl-item iframe { height: 70px!important; width: 100%; max-height: 70px!important; }
+	.form-perfil .btn-verde { margin-top:1em; }
+	.striped-2 thead { display:none; }
+	.tabela-mensagens th, .tabela-mensagens td { width: 100%!important; font-weight: 500; position: relative; display: table; margin: 10px 0; border: 0; text-indent:10px; }
+	.striped-2 p { width:100%; padding-left: 10px; text-indent:0; }
+	.striped-2 p + b { padding-left:10px; }
+	.striped-2 td:nth-child(2) { border:0; padding-left:10px; }
+	.striped-2 td:nth-child(2) i { padding-left:10px; }
+	.barra-titulo { padding: 2em 0 0; margin:1rem 0 0; }
+	/*.tabela-mensagens .btn-verde-claro i { margin-top: -10px; }*/
+	.btn-laranja { min-width:100%; }
+	 #num-embarcacoes { width:100%; }
+	.resumo-escolha .col { padding-left:0; }
+	.count4 { column-count: 1; }
+	.count4 li { margin:10px 0; }
+	.form-perfil .input-group { display:table; }
+	.form-perfil .input-group input { clear: both; display: block; width: 100%; padding-left:0 }
+	.form-perfil.atualizacao .input-group input { padding-left:1rem; }
+	.form-perfil .input-group-prepend { display: table; align-items: initial; width:100%; }
+	.embarcacoes .btn-padrao-branco { width:100%; margin:10px 0; }
+	.status-embarcacao .form-inline .btn:not(:last-child) { margin-right: 0; }
+	.dados-escolhido, .pagamentos { margin:1rem 0; padding: 1em 0; }
+	.bg-faded, #opinioes .card-block { padding: 3em 1em 1em; margin: 2em 0 0; }
+	.modal .estiliza-select { margin: 0 0 1rem 0; }
+	.embarcacoes .escolha b { margin:0; }
+	.embarcacoes .escolha strong i { margin-right:0; }
+	.lista-5 li a, .lista-5 li a img { width: 100%!important; height: auto!important; }
+	.colocacao { right:5px; }
+	.count5 { column-count: 2; }
+	.campo-avaliacao textarea { min-height: 400px; padding: 4.5rem 30px; margin: 3rem 0 0; }
+	.questoes .estrelas label { margin: 0 5px; }
+	.questoes .mb-4 p { text-align: left; }
+	.nav-busca li, .nav-busca li a { width:100%; text-align:left; position:relative; }
+	.nav-busca .dropdown-menu { position: relative; top: 0px; }
+	.anuncio-topo { max-width:100%; }
+	.lista-barcos .quadro { margin: auto; width: 90%; text-align: left; }
+	.lista-barcos .links a { display: block; border-right: 0; padding: 0 5px!important; }
+	.lista-barcos .quadro .estrelas, .lista-barcos .quadro .opinioes { text-align: left }
+	.lista-barcos .quadro .opinioes { padding-left:1rem; }
+	.lista-barcos .well figure, .lista-barcos .well figure img { width:100%!important; height:auto!important; }
+	.lista-barcos .well:hover .mascara-hover .link { top: 2rem; }
+	.mascara-hover .col-md-8 {  position: absolute; bottom: 0; }
+	.modal-body .form-check-label { white-space: initial; }
+	.bigboat { background-image:none; }
+	.col-sm-6.mosaicflow__item.thumbnail{ width:50%; }
+	#titulo-subpagina.x2 .container { width:100%; }
+	#titulo-subpagina.x2 h1 img { display: block; right:0; }
+	.modal-body .btn-verde { left: 0; width: 100%; white-space: initial; text-align: center!important; }
+	.modal .btn-verde-claro { width:100%; }
+	.stylish-input-group { max-width: 90%; }
+	.owl-item iframe { max-width: 100%; max-height: 50px; width: 100%; height: auto; }
+	.tabela-dashboard tr td { text-align: left!important; margin: 1rem; border-top:0!important; }
+	.ver-mais, .ver-mais:visited { bottom:0; left: .15rem; }
+	.ajusta-tabela tr { padding: 1rem; display: block; }
+	.ajusta-tabela td:nth-child(2) i { padding-left: 5px; }
+	.mosaicflow__item:hover { transform: scale(1)!important; }
+	.nav-detalhes { display:none; }
+	#parceiros, #semelhantes { padding: 0; margin:0; }
+	#opinioes { padding: 0 ; }
+	#opinioes .btn { margin: 3em auto 0; }
+	#opinioes .btn { margin: 0 auto 1rem; width: 92%!important; }
+	#destaques .estrelas, .avaliar .quadro .estrelas { text-align: left!important; }
+	.zebrada td, .zebrada-invert td { display: block!important; }
+	#opinioes.avaliar .btn { margin: 3em auto; }
+	#destaque.avaliar .card-block { box-shadow: none; transform: scale(1.2); background: #FFF; padding: 15px; border-radius:3px; }
+	#destaque.avaliar .btn-padrao-azul { width: 90%!important; }	
+	.bg-imagem.avaliar { background-size: 100% 94%; background-position: top; }
+	.avaliar img { margin: 0 0 2rem 0; }
+	.ajusta-titulo { padding-left:2rem; }
+	.col-sm-6 { width:50%; }
+	.col-sm-6 .btnalt { white-space:normal; line-height: 18px; text-align: left; font-size: 13px; }
+	.col-sm-6 .btnalt span { display:table; width:60%; }
+	.avaliar .bloco-opiniao p { text-align:justify; }
+	.avaliacao h4 { margin-top: 2rem; margin-bottom: 0; font-weight:600; }
+	#formAvaliacao .col-lg-1 { width: 10%; padding-left: 5px; font-weight: 600; }
+	#formAvaliacao .col-lg-5 { width: 90%; }
+	#formAvaliacao .col-lg-6 { padding-left: 0; }
+	#titulo .btn-padrao-branco { display:none; }
+	.bg-imagem { background-position-y: 30.5%; background-size: 100% 43.5%; }
+	.quadro .col-md-6, .quadro .col-md-7, .quadro .col-md-5 { width:50%; }
+	#destaque .card-img-top { margin: .5rem 0; }
+	#destaque .card-block { padding:20px; }
+	.container.zoom-left .col-lg-4, .ajusta-ie .col-lg-4 { padding:0; }
+	h5.card-title { font-size: 0.8rem; }
+	#dados-produto { border-top: 2rem solid #f2f2f2; }
+	h3 { padding: 1rem 0; font-size: 1.53rem; width:100%; }
+	#opinioes h3 { padding-left:1rem; }
+	#materias.bg-faded {padding: 0 0 1rem 0; margin:0; }
+	#opinioes .btn-padrao-azul {margin: 1rem auto 0; width: 82%!important;}
+	.parceiros { padding: 1rem; }
+	.noticias { margin:1rem auto; width: 70%; }
+	.espacamento { padding: 0; }
+	.titulo span { top: 15px; }
+	.bloco-opiniao { padding: 0 1em 1em; margin-bottom:1em; }
+	.lista-blocos hr { display: none }
+	.espaco2 { margin: 0 0 1em; }
+	#titulo-subpagina { padding-top: 2rem; padding-bottom: 1rem; }
+	.thumbnail { max-height: 250px; }
+	figcaption { display:none; }
+	#tab-dashboard .bg-faded { padding: 3rem 0; }
+	#materias .well p { display:none; }
+	#titulo { padding:2rem 0 0; }
+	#titulo .anuncio-topo { margin-bottom: 0; }
+	.lista-barcos .col-md-4 { width:40%; }
+	.lista-barcos .col-md-4 figure, .lista-barcos .col-md-4 figure img { width: 100%!important; max-height: 100%!important;display: block; min-height:105px; }
+	.lista-barcos .col-md-8 { width:60%; padding:0!important; margin:0!important; }
+	.lista-barcos .card h1 { font-size:1rem; padding:0!important; font-weight:800!important; line-height:1; margin:0; }
+	.lista-barcos .card h2 { padding-left:0; font-size: 12px; color:#63bcc3; margin:0!important;}
+	.lista-barcos .card .estrelas { text-align: left; padding:5px 0; }
+	.lista-barcos .card p { text-align: left; padding:0; margin-bottom:1rem!important; }
+	.lista-barcos .mascara-hover * { display:none; }
+	.lista-barcos .mascara-hover .row, .lista-barcos .mascara-hover .col-md-4, .lista-barcos .mascara-hover .link, .lista-barcos .mascara-hover .link a, .lista-barcos .mascara-hover .link i {  display: block; width: auto; vertical-align: middle; padding-top: .5rem; }
+	.lista-barcos .mascara-hover .link i { padding-top: 0; margin-top: -2px; margin-left: 10px; }
+	.modal-body { padding: 0 1em; }
+	h1 small { font-size: 14px; bottom: 20px; padding-left: 2px; }
+	.pagamentos .well { min-height:110px; }
+	.questoes form .mt-4, .avaliacao { padding-left: 1rem; }
+	section#opinioes { padding-bottom: 2rem; }
+	.quadro .col-md-6, .quadro .col-md-7, .quadro .col-md-5 { padding-right: 0; }
+	.conteudo { padding-bottom:0; }
+	.lista-status { margin-top:.2rem; }
+	.form-perfil h3 { padding-top: 1rem; }
+	.table-anuncios .col-md-10{ padding: 1em 1em 0; }
+	.table-anuncios { margin:0; }
+	.table-anuncios h4 { padding:1rem 0; }
+	.table-anuncios h4.com-barra:before { background:transparent; }
+	.modal .ver-mais, .ver-mais:visited { bottom: .5rem; left: .15rem; }
+	.modal .modal-footer .ver-mais, .modal-footer .ver-mais:visited { bottom: .5rem; left:0!important; padding-left:0!important; }
+	.resumo { padding: 3em 0 1rem; }
+	.resumo .btn-laranja { margin-top: 1rem; }
+	.faixa .container { padding-top:0; }
+	.pagamentos .col-lg-3 { width:50%; }
+	.col-lg-12 .btn.btn-verde-claro, .btn-laranja.small { margin-top: 1em; }
+	.modal .separa { margin-bottom:1rem; }
+	.modal .nav-pills {  margin-top:0; width: 100%; display: flex; } 
+	.estiliza-select { padding: 1em 0; }
+	.filtros h4 { margin: 0 0 1rem; }
+	.filtros h5 { margin: 1rem 0; padding:0; }
+	#menu-tabs { display:none; }
+	.nav-busca select { padding: 1rem!important; height: 40px!important; }
+	.count2-resp { font-size: 12px; }
+	footer h4 { min-height: 40px; }
+	.stylish-input-group .form-control { padding-left: 0 }
+	/*#materias .well p, #materias .title, #opinioes .title, #parceiros .title, #semelhantes .title { display:none; }*/
+	#titulo-subpagina.x2 h1 { font-size: 350%!important; font-family: Helvetica; font-weight: 600!important; color: #102e46; letter-spacing: -4px; }
+	#titulo-subpagina.x2 h1 small { bottom: 30px; padding-left: 0; }
+	#titulo-subpagina.x2 h1 img { display: none!important; }
+}
+
+@media (max-width:576px) {
+	.count5 { column-count: 1; }
+	table:not(.table-anuncios) td { display: table; }
+	#titulo .breadcumbs { margin:0!important; }
+	/*.bg-faded { padding: 0 1em 3em; }*/
+	.stylish-input-group .form-control { width:60%; }
+	.status-embarcacao .col-lg-2 img { width:100%!important; height:auto!important; }
+}
+
+@media (max-width: 420px) {
+	* { }
+}
+
+
+@-moz-document url-prefix() { 
+  .estrelas label { margin: 0 1px!important; }
+  .bloco-opiniao { margin-bottom: 1.9em!important; } 
+  #inputTelefone { box-shadow:none; }
+  .modal .estiliza-select {padding: 0;background-position: right 8px center;}
+  textarea.campo-dados { min-height: 220px;}
+  .estiliza-select { padding:1em 0; }
+  .estiliza-select select { margin: 2.3em 0; }
+  .nav-busca .estiliza-select { padding:0; }
+}
+ 
+#destaque .card-block, #opinioes .card-block { width:100%\0/; }
+.estrelas { margin-left:-5px\0/ !important; }
+.estrelas label { margin: 0 1px\0/ !important; }
+.bloco-opiniao { margin-bottom: 1.82em\0/; }
+#inputTelefone { box-shadow:none\0/; }
+.modal .estiliza-select {padding: 0\0/; background-position: right 8px center\0/;}
+textarea.campo-dados { min-height: 220px\0/; }
+.estiliza-select { padding:1em 0\0/; }
+.estiliza-select select { margin: 2.3em 0\0/; }
+.nav-busca .estiliza-select { padding:0\0/; }
+select::-ms-expand { display: none; }
+.parceiros .well, .pagamentos .well { padding-top:25%\0/; }
+.parceiros .well img, .pagamentos .well img { position: absolute\0/; bottom:15%\0/; left:50%\0/; margin-left:-20%\0/; }
+#dados-embarcacao label { padding-top:5px\0/; }
+.table-anuncios h4 { bottom:15px\0/ !important; }
+.table-anuncios tfoot p { bottom:0!important; }
+.ajusta-ie { display:block\0/; width:100%\0/; margin-top: 5em\0/; }
+.count2 { float:left\0/; width:66.66%\0/; }
+.ajusta-ie .col-lg-4 { float:right\0/; width:33.33%\0/; }
+.bloco-opiniao:nth-of-type(3) { margin-top:8rem\0/; }
+.parceiros .well img, .pagamentos .well img { position: relative\0/; bottom: 0\0/; left: 0\0/; padding: 0\0/!important; margin: 0\0/; margin-left:0\0/; margin-right:10px\0/; }
+.parceiros .well, .pagamentos .well { padding-top: 0\0/; }
+.side-collapse { background:#106e42\0/ !important; }
+.ver-mais, .ver-mais:visited { bottom:75px\0/ !important; }
+
+
+@supports (-ms-ime-align:auto) { 
+	#destaque .card-block, #opinioes .card-block { width:100%; }
+	.estrelas { margin-left:-5px!important; }
+	.estrelas label { margin: 0 1px!important; }
+	.bloco-opiniao { margin-bottom: 1.82em; }
+	#inputTelefone { box-shadow:none; }
+	.modal .estiliza-select {padding: 0;background-position: right 8px center;}
+	textarea.campo-dados { min-height: 220px;}
+	.estiliza-select { padding:1em 0; }
+	.estiliza-select select { margin: 2.3em 0; }
+	.nav-busca .estiliza-select { padding:0; }
+	.parceiros .well, .pagamentos .well { padding-top:25%; }
+	.parceiros .well img, .pagamentos .well img { position: absolute; bottom:15%; left:50%; margin-left:-20%; }
+	#dados-embarcacao label { padding-top:5px; }
+	.table-anuncios h4 { bottom:15px!important }
+	.table-anuncios tfoot p { bottom:0!important; }
+	.ajusta-ie { display:block; width:100%; margin-top: 5em; }
+	.count2 { float:left; width:66.66%; }
+	.ajusta-ie .col-lg-4 { float:right; width:33.33%; }
+	.bloco-opiniao:nth-of-type(3) { margin-top:8rem; }
+	.parceiros .well img, .pagamentos .well img { position: relative; bottom: 0; left: 0; padding: 0!important; margin: 0; margin-left:0; margin-right:10px; }
+	.parceiros .well, .pagamentos .well { padding-top: 0; }
+	.side-collapse { background:#106e42!important; }
+	.ver-mais, .ver-mais:visited { bottom:75px !important; }
+}

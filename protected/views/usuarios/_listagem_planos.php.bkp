@@ -1,0 +1,174 @@
+
+
+<div class="box-info-3-3">
+
+    <?php
+    $flgachouPlano = false;
+    $contPlanos = 0;
+    foreach ($planoUsuarios as $p) {
+
+        if ($p->planos->flag == 'plano_empresa' && ($p->status == 1 || $p->status == 2 || $p->status == 0)) {
+            $flgachouPlano = true;
+        }
+        if ($p->status == 2 && $p->fim != null) {
+            $contPlanos++;
+            $flgachouPlano = true;
+        }
+
+
+    }
+
+    if ($flgachouPlano) {
+        echo '<span class="title-box-info">Planos Ativos ('.$contPlanos.')</span>';
+    }
+    ?>
+
+
+    <div class="tabela-planos">
+        <?php
+        $htmlClassificados = "";
+        $htmlGuia = "";
+        $htmlCatalogo = "";
+
+
+        // loop para cada registro de planoUsuario => pegamos o plano
+        foreach ($planoUsuarios as $p) {
+
+            $p->inicio = implode("-",array_reverse(explode("/",$p->inicio)));
+
+            $inicio = date('Y-m-d', strtotime($p->inicio));
+
+            $dataexpiracao = date('Y-m-d', strtotime($inicio.' + 1 month'));
+
+            $dia = date('d', strtotime($dataexpiracao));
+            $ano = date("Y", strtotime($dataexpiracao));
+            $mes = date("m", strtotime($dataexpiracao));
+
+
+            /*$htmlClassificados .= '<div class="plano-line"><div class="plano-tipo">Anúncio Individual <br>' . $p->qntpermitida . ' anúncios' . ' - ' . $p->planos->duracaomeses . ' meses ' . 'R$ ' . Utils::formataValorView($p->planos->valor) . '</div>';
+            $htmlClassificados .= '<div class="plano-vencimento"><b data-dia="'.$dia.'" data-mes="'.$mes.'" data-ano="'.$ano.'" id="defaultCountdown"></b></span></div>';
+            //$htmlClassificados .= '<a id="alterar-dados-pf" class="bt-action" href="'.Yii::app()->createUrl("anuncios/anuncioPagamento?minha_conta=1").'">Pagar Plano</a>';
+            //$htmlClassificados .= '<a class="bt-renew-plan link-renovar" data-limitepreco="' . $p->planos->limitepreco . '" data-id="' . $p->id . '" data-descricaoplano="' . $p->planos->titulo . '" data-qntpermitida="' . $p->planos->qntpermitida . '" data-meses="' . $p->planos->duracaomeses . '" href="' . .Yii::app()->createUrl("anuncios/anuncioPagamento?minha_conta=1"). . '">Renovar</a></div>';
+    
+            /*elseif ($p->status == 0 && $p->fim == null) {
+
+                    $htmlClassificados .= '<div class="plano-line"><div class="plano-tipo">Anúncio Individual <br>' . $p->qntpermitida . ' anúncios' . ' - ' . $p->planos->duracaomeses . ' meses ' . 'R$ ' . Utils::formataValorView($p->planos->valor) . '</div>';
+                    $htmlClassificados .= '<div style="color:red;" class="plano-vencimento">Aguardando ativação</span></div>';
+
+            }*/
+         
+
+            if (empty($p->inicio) || empty($p->fim))
+                continue;
+
+            // verificar se o plano está perto da data de validade para exibir o plano de renovação
+            $hoje = new DateTime('now');
+            $fim = DateTime::createFromFormat('d/m/Y', $p->fim);
+            if (empty($fim))
+                continue;
+
+            $dias = $hoje->diff($fim)->format('%a');
+            $dias = ($hoje > $fim) ? $dias * -1 : $dias;
+
+
+            if ($p->planos->flag == 'plano_empresa') {
+
+                // $htmlGuia .= '<div class="plano-line"><div class="plano-tipo">' . $p->planos->titulo . '</div>';
+                //$htmlGuia .= '<div class="plano-vencimento">Vencimento: <br/><span>' . Utils::formatDateTimeToView($p->fim) . '</span></div></div>';
+                $htmlGuia .= '<div class="plano-line"><div class="plano-tipo">' . $p->planos->titulo . '</div>';
+
+                if ($dias < 0) {
+                    $htmlGuia .= '<div class="plano-vencimento">Vencido ('.$fim->format('d/m/Y').')</span></div>';
+                } else {
+                    $htmlGuia .= '<div class="plano-vencimento"><span>' . PlanoUsuarios::$_status_plano_id[$p->status] . ' / Vencimento: ' . $fim->format('d/m/Y') . '</span></div>';
+                }
+
+                if ($dias <= 7) {
+                    $htmlGuia .= '<a class="bt-renew-plan link-renovar" data-limitepreco="' . $p->planos->limitepreco . '" data-id="' . $p->id . '" data-descricaoplano="' . $p->planos->titulo . '" data-qntpermitida="' . $p->planos->qntpermitida . '" data-meses="' . $p->planos->duracaomeses . '" href="' . Yii::app()->createUrl('/planoUsuarios/renovarPlano', array('id' => $p->id)) . '">Renovar</a></div>';
+                }
+
+
+            } elseif ($p->planos->flag == 'plano_embarcacao' /*&& ($p->status == Anuncio::$_status_plano['CRIADO'] || $p->status == Anuncio::$_status_plano['PAGO'])*/) {
+
+                $htmlClassificados .= '<div class="plano-line"><div class="plano-tipo">Plano Plus ' . $p->qntpermitida . ' anúncios' . ' - ' . $p->planos->duracaomeses . ' meses ' . 'R$ ' . Utils::formataValorView($p->planos->valor) . '</div>';
+
+                if ($dias < 0) {
+                    $htmlClassificados .= '<div class="plano-vencimento">Vencido ('.$fim->format('d/m/Y').')</span></div>';
+                } else {
+                    $htmlClassificados .= '<div class="plano-vencimento"><span>' . PlanoUsuarios::$_status_plano_id[$p->status] . ' / Vencimento: ' . $fim->format('d/m/Y') . '</span></div>';
+                }
+
+                // se a diferença for de 6~7 dias, exiberemos o botão, indicando que o plano está vencendo
+                if ($dias <= 7) {
+
+                    $htmlClassificados .= '<a class="bt-new-plan" href="' . Yii::app()->createUrl('/planoUsuarios/upgradePlano', array('id' => $p->id)) . '">Escolher Novo Plano</a>';
+
+                    $htmlClassificados .= '<a class="bt-renew-plan link-renovar" data-limitepreco="' . $p->planos->limitepreco . '" data-id="' . $p->id . '" data-descricaoplano="' . $p->planos->titulo . '" data-qntpermitida="' . $p->planos->qntpermitida . '" data-meses="' . $p->planos->duracaomeses . '" href="' . Yii::app()->createUrl('/planoUsuarios/renovarPlano', array('id' => $p->id)) . '">Renovar</a></div>';
+                }
+
+            } elseif ($p->planos->flag == 'anuncio_individual' /*&& ($p->status == Anuncio::$_status_plano['CRIADO'] || $p->status == Anuncio::$_status_plano['PAGO'])*/) {
+
+                if($p->gratuito == 1) {
+                    $htmlClassificados .= '<div class="plano-line"><div class="plano-tipo">Anúncio Gratuíto <br></div>';
+                }
+                else {
+
+                    $htmlClassificados .= '<div class="plano-line"><div class="plano-tipo">Anúncio Individual <br>' . $p->qntpermitida . ' anúncios' . ' - ' . $p->planos->duracaomeses . ' meses ' . 'R$ ' . Utils::formataValorView($p->planos->valor) . '</div>';
+
+                    if ($dias < 0) {
+                        $htmlClassificados .= '<div class="plano-vencimento">Vencido ('.$fim->format('d/m/Y').')</span></div>';
+                    } else {
+                        $htmlClassificados .= '<div class="plano-vencimento"><span>' . PlanoUsuarios::$_status_plano_id[$p->status] . ' / Vencimento: ' . $fim->format('d/m/Y') . '</span></div>';
+                    }  
+
+
+                    // se a diferença for de 6~7 dias, exiberemos o botão, indicando que o plano está vencendo
+                    if ($dias <= 7) {
+
+                        $htmlClassificados .= '<a class="bt-new-plan" href="' . Yii::app()->createUrl('/planoUsuarios/upgradePlano', array('id' => $p->id)) . '">Escolher Novo Plano</a>';
+
+                        $htmlClassificados .= '<a class="bt-renew-plan link-renovar" data-limitepreco="' . $p->planos->limitepreco . '" data-id="' . $p->id . '" data-descricaoplano="' . $p->planos->titulo . '" data-qntpermitida="' . $p->planos->qntpermitida . '" data-meses="' . $p->planos->duracaomeses . '" href="' . Yii::app()->createUrl('/planoUsuarios/renovarPlano', array('id' => $p->id)) . '">Renovar</a></div>';
+                    }  
+                }
+                
+
+
+            } elseif ($p->planos->flag == 'plano_estaleiro') {
+
+                $htmlCatalogo .= '<div class="plano-line"><div class="plano-tipo">Plano de Estaleiro <br>' . $p->qntpermitida . ' anúncios' . '</div>';
+
+                if ($dias < 0) {
+                    $htmlCatalogo .= '<div class="plano-vencimento">Vencido ('.$fim->format('d/m/Y').')</span></div>';
+                } else {
+                    $htmlCatalogo .= '<div class="plano-vencimento"><span>' . PlanoUsuarios::$_status_plano_id[$p->status] . ' / Vencimento: ' . $fim->format('d/m/Y') . '</span></div>';
+                }
+
+                /*if ($p->status == Anuncio::$_status_plano['PAGO']) {
+                    $htmlCatalogo .= '<div class="plano-line"><div class="plano-tipo">Plano de Estaleiro <br>' . $p->qntpermitida . ' anúncios' . '</div>';
+                    $htmlCatalogo .= '<div class="plano-vencimento">Vencimento: <br/><span>' . $fim->format('d/m/Y') . '</span></div></div>';
+                }*/
+
+            }
+
+        }
+
+        if ($htmlGuia != "") {
+            echo '<span class="title-planos">Guia de Empresas</span>';
+            echo $htmlGuia;
+        }
+
+        if ($htmlClassificados != "") {
+            echo '<span class="title-planos">Classificados</span>';
+            echo $htmlClassificados;
+        }
+
+        if ($htmlCatalogo != "") {
+            echo '<span class="title-planos">Estaleiro</span>';
+            echo $htmlCatalogo;
+        }
+        ?>
+    </div>
+
+    <br class="clr">
+
+</div>

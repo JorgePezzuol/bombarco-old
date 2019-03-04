@@ -1,0 +1,279 @@
+/*!
+ * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+body {
+    margin-top: 100px;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+#wrapper {
+    padding-left: 0;
+}
+
+#page-wrapper {
+    padding: 0;
+    background-color: #fff;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
+@media(min-width:768px) {
+
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+
+.top-nav>li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    color: #999;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    background-color: #000;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    border: 1px solid rgba(0,0,0,.15);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: normal;
+}
+
+ul.message-dropdown {
+    padding: 0;
+    max-height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+li.message-preview {
+    width: 275px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+li.message-preview>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+li.message-footer {
+    margin: 5px 0;
+}
+
+ul.alert-dropdown {
+    width: 200px;
+}
+
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #000 !important;
+    }
+}
+
+.side-nav>li {
+  transition: height 0.3s;
+    border-top: 1px solid #333;
+}
+.side-nav>li i {
+  float:right;
+  margin-top:4px;
+}
+.side-nav>li>ul {
+    padding: 0;
+    overflow: hidden;
+}
+.side-nav>li.open>ul {
+    height:auto;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+/* Flot Chart Containers */
+
+.flot-chart {
+    display: block;
+    height: 400px;
+}
+
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom Colored Panels */
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+    color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+    color: #df8a13;
+}
+
+/*#page-wrapper { padding:0 20px; float:left; }*/
+#content .pager { text-align:center; }
+#content .pager ul { margin:0; padding:0; }
+#content .pager ul li { display:inline; float:none; border:0; margin:0 4px; }
+#content .pager ul li a { font-weight:normal; border-radius:0; float:none; font-size:16px; border:0; color:#333; padding:8px; }
+#content .pager ul li.selected a { background:#ccc; }
+#content .table .fa-pencil { margin:0 10px; }
+#content .table .pure-button { margin:10px 0 0; display:block; }
+#content .table .button-column { width:84px; }
+#content .table .even td { background:#fafafa; }
+
+.linha-admin-form2,
+.linha-admin-form { float:left; width:100%; margin:0 0 10px; }
+.linha-admin-form .box-admin-form,
+.linha-admin-form2 .box-admin-form { float:left; width:100%; margin:0 0 10px; }
+.linha-admin-form2 .text-admin-for,
+.linha-admin-form .text-admin-form { float:left; width:250px; }
+.linha-admin-form input[type="text"],
+.linha-admin-form select,
+.linha-admin-form2 input[type="text"],
+.linha-admin-form2 select { height:32px; line-height:32px; padding:0 20px; width:400px; }
+.linha-admin-form textarea,
+.linha-admin-form2 textarea { padding:0 20px; width:400px; }
+.linha-admin-form2 .text-admin-form,
+.linha-admin-form .text-admin-form { float:left; width:250px; }
+.linha-admin-form2 .embarcacao_macros_id,
+.linha-admin-form .embarcacao_macros_id { float:left; }
+.linha-admin-form2 input.botao-cad-admin,
+.linha-admin-form input.botao-cad-admin { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; color: #fff; background-color: #337ab7; border-color: #2e6da4; }
+
+.navbar-inverse .navbar-brand { position: absolute; left: 50%; top: 0; margin: 0 0 0 -134px; }
+.navbar-inverse .openMenu { text-decoration:none; font-size:26px; margin:12px 14px; color:#999; }
+.navbar-brand { padding:11px 15px; }
+.side-nav { display:none; }
+.side-nav.open { display:block; }
+
+/*.wysiwyg-container { max-height:400px; overflow:auto !important; }*/
+
+.grid-view .button-column img { display:none !important; }
+.grid-view .button-column .pure-button.margin { margin-left:10px !important; margin-right:10px !important; }
+
+
+.preloader{display:none;z-index:99999;width:100%;height:100%;position:fixed;top:0;left:0;text-align:center;background:rgba(255,255,255,0.75)}.preloader img{margin:0 auto;position:absolute;top:50%;left:50%}

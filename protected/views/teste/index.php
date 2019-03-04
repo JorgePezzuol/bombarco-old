@@ -1,0 +1,2 @@
+        <?php
+        echo GxHtml::button(Yii::t('app', 'FINALIZAR'), array('class'=>'botao-cadastro-2', 'id'=>'btn-form', 'data-outro-anuncio'=>0, 'onclick' => '_gaq.push(["_trackEvent", "teste-seo", "click", "teste-seo"]);'));

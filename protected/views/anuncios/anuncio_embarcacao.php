@@ -1,0 +1,19 @@
+<?php
+	$this->renderPartial('_form', array('model'=>$model, 
+				'recursosAdicionais'=>$recursosAdicionais,
+				'acessoriosJetSki'=>$acessoriosJetSki,
+				'acessoriosLancha'=>$acessoriosLancha,
+				'acessoriosVeleiro'=>$acessoriosVeleiro,
+				'acessoriosPesca'=>$acessoriosPesca,
+				'qntPermitida'=>$qntPermitida,
+				'meses'=>$meses,
+				'qntAnunciosCadastrados'=>$qntAnunciosCadastrados,
+				'maxprice'=>$maxprice,
+				'flgEstaleiro'=>$flgEstaleiro,
+				'motorModelo'=>$motorModelo,
+				'motorFabricante'=>$motorFabricante,
+				'email'=>$email,
+				'valorPlano'=>$valorPlano
+			)
+		);
+?>

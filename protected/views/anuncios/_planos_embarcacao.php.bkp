@@ -1,0 +1,140 @@
+<div class="box-line-3-planos-a">
+		<div class="div-text1b-l3-an-a">
+			<span class="text1-l3-an-a">Pacote Plus</span>	
+		</div>	
+	<div class="div-box-planos">
+
+		<div class="box-line-3-planos-escolha">
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text4-l3-an-a">
+					<span class="text4-l3-an-a">6 ANÚNCIOS</span>	
+				</div>
+			</div>	
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text2-l3-an-a">
+					<span class="text2-l3-an-a">Validade do anúncio</span>	
+				</div>	
+					<div class="div-select-an">								
+						<span class="select-form-anunciar">
+							<select id="6-anuncios" class="anuncios select-anuncio-pad" data-qtdepermitida="6">
+								<!-- o value contém os ID's dos planos na tabela planos e a quantidade total de anúncios
+								permitidos, separados por | -->
+								<option value="null">Selecione</option>
+								<option value="3" selected="selected">3 meses</option>
+								<option value="6">6 meses</option>
+								<option value="12">1 ano</option>
+							</select>
+						</span>	
+					</div>
+			</div>
+			<div class="quadro2-line-3-planos-escolha">
+				<div class="div-text3-l3-an-a">
+					<span id="teste" class="valor-span text3-l3-an-a">R$ 477,00</span>	
+				</div>	
+				<div class="div-botao-contratar-an">
+						<a class="href-anuncio botao-contratar-an href-anunciar-embarcacao-6-anuncios" href="<?php echo Yii::app()->createUrl('anuncios/anunciarEmbarcacao?pid=9&qnt=6&valor=477.00&meses=3&tipo_anuncio=plano'); ?>" onclick="_gaq.push(['_trackEvent', 'anuncios', 'click', 'CONTRATAR6']);">CONTRATAR</a>
+				</div>	
+			</div>	
+		</div>	
+
+		<div class="box-line-3-planos-escolha">
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text4-l3-an-a">
+					<span class="text4-l3-an-a">15 ANÚNCIOS</span>	
+				</div>
+			</div>	
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text2-l3-an-a">
+					<span class="text2-l3-an-a">Validade do anúncio</span>	
+				</div>	
+					<div class="div-select-an">								
+						<span class="select-form-anunciar">
+							<!-- o value contém os ID's dos planos na tabela planos e a quantidade total de anúncios
+								permitidos, separados por | -->
+							<select id="15-anuncios" class="anuncios select-anuncio-pad" data-qtdepermitida="15">
+								<option value="null">Selecione</option>
+								<option value="3" selected="selected">3 meses</option>
+								<option value="6">6 meses</option>
+								<option value="12">1 ano</option>
+							</select>
+						</span>	
+					</div>
+			</div>
+			<div class="quadro2-line-3-planos-escolha">
+				<div class="div-text3-l3-an-a">
+					<span id="h1-15-anuncios" class="text3-l3-an-a">R$ 627,00</span>	
+				</div>
+				<div class="div-botao-contratar-an">
+						<a class="botao-contratar-an" id="href-anunciar-embarcacao-15-anuncios" href="<?php echo Yii::app()->createUrl('anuncios/anunciarEmbarcacao?pid=10&qnt=15&valor=627.00&meses=3&tipo_anuncio=plano'); ?>" onclick="_gaq.push(['_trackEvent', 'anuncios', 'click', 'CONTRATAR15']);">CONTRATAR</a>
+				</div>		
+			</div>	
+		</div>
+
+		<div class="box-line-3-planos-escolha">
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text4-l3-an-a">
+					<span class="text4-l3-an-a">30 ANÚNCIOS</span>	
+				</div>
+			</div>	
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text2-l3-an-a">
+					<span class="text2-l3-an-a">Validade do anúncio</span>	
+				</div>	
+					<div class="div-select-an">								
+						<span class="select-form-anunciar">
+							<!-- o value contém os ID's dos planos na tabela planos e a quantidade total de anúncios
+								permitidos, separados por | -->
+							<select id="30-anuncios" class="anuncios select-anuncio-pad" data-qtdepermitida="30">
+								<option value="null">Selecione</option>
+								<option value="3" selected="selected">3 meses</option>
+								<option value="6">6 meses</option>
+								<option value="12">1 ano</option>
+							</select>
+						</span>	
+					</div>
+			</div>
+			<div class="quadro2-line-3-planos-escolha">
+				<div class="div-text3-l3-an-a">
+					<span id="h1-30-anuncios" class="text3-l3-an-a">R$ 837,00</span>	
+				</div>	
+				<div class="div-botao-contratar-an">
+						<a class="botao-contratar-an" id="href-anunciar-embarcacao-30-anuncios" href="<?php echo Yii::app()->createUrl('anuncios/anunciarEmbarcacao?pid=11&qnt=30&valor=837.00&meses=3&tipo_anuncio=plano'); ?>" onclick="_gaq.push(['_trackEvent', 'anuncios', 'click', 'CONTRATAR30']);">CONTRATAR</a>
+				</div>	
+			</div>	
+		</div>
+
+		<div class="box-line-3-planos-escolha">
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text4-l3-an-a">
+					<span class="text4-l3-an-a">60 ANÚNCIOS</span>	
+				</div>
+			</div>	
+			<div class="quadro-line-3-planos-escolha">
+				<div class="div-text2-l3-an-a">
+					<span class="text2-l3-an-a">Validade do anúncio</span>	
+				</div>	
+					<div class="div-select-an">								
+						<span class="select-form-anunciar">
+							<!-- o value contém os ID's dos planos na tabela planos e a quantidade total de anúncios
+								permitidos, separados por | -->
+							<select id="60-anuncios" class="anuncios select-anuncio-pad" data-qtdepermitida="60">
+								<option value="null">Selecione</option>
+								<option value="3" selected="selected">3 meses</option>
+								<option value="6">6 meses</option>
+								<option value="12">1 ano</option>
+							</select>
+						</span>	
+					</div>
+			</div>
+			<div class="quadro2-line-3-planos-escolha">
+				<div class="div-text3-l3-an-a">
+					<span id="h1-60-anuncios" class="text3-l3-an-a">R$ 1.017,00</span>	
+				</div>	
+				<div class="div-botao-contratar-an">
+						<a class="botao-contratar-an" id="href-anunciar-embarcacao-60-anuncios" href="<?php echo Yii::app()->createUrl('anuncios/anunciarEmbarcacao?pid=12&qnt=60&valor=1017.00&meses=3&tipo_anuncio=plano'); ?>" onclick="_gaq.push(['_trackEvent', 'anuncios', 'click', 'CONTRATAR60']);">CONTRATAR</a>
+				</div>	
+			</div>	
+		</div>
+
+	</div>
+</div>	

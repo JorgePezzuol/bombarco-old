@@ -487,23 +487,10 @@ return array(
             'logging' => true,
             'dryRun' => false,
             'transportOptions'=>array(
-
-                /*'host'=>'smtp.gmail.com',
-                'username'=>"bombarcoadm2@gmail.com",
-                'password'=>"*bombarco1116",
-                'port'=>'465',
-                'encryption'=>'ssl',*/
-
-                /*'host'=>'smtp.sendgrid.net',
-                'username'=>'Bombarco',
-                'password'=>'bombarco5890',
-                'port'=>'465',
-                'encryption'=>'ssl'*/
-
                 //'host'=>'md-6.webhostbox.net',
-                'host'=>'br546.hostgator.com.br',
-                'username'=>'autenticacao@bombarco.com.br',
-                'password'=>'autenticar123@',
+                'host'=>'####################',
+                'username'=>'########################',
+                'password'=>'#######################',
                 'port'=>'465',
                 'encryption'=>'ssl'
             ),
@@ -522,11 +509,11 @@ return array(
 
         'db'=>array(
             'class'=>'CDbConnection',
-            'connectionString' => 'mysql:host=br546.hostgator.com.br;dbname=bombalau_bombarco',
+            'connectionString' => '#############################',
             'emulatePrepare' => true,
-            'username' => 'bombalau_user',
+            'username' => '###########################',
             //'username' => 'root',
-            'password' => '#Bombarco2016',
+            'password' => '###################',
             //'password' => 'super',
             'charset' => 'utf8',
             'enableParamLogging'=>true,

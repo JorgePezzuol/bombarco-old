@@ -14,7 +14,7 @@
 Platform created in 2014 with a focus on the nautical business
 
 ## Screenshots
-<img src="./docs/demonstration.gif" width="50%" height="40%">
+<img src="demonstration.jpeg" width="50%" height="40%">
 
 ## Technologies
 * PHP - Yii framework

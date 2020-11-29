@@ -1,5 +1,5 @@
 # Project Name
-> [Bombarco](http://bombarco.com.br)
+> Bombarco: http://bombarco.com.br
 
 ## Table of contents
 * [General info](#general-info)
